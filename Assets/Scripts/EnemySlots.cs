@@ -16,7 +16,7 @@ public class EnemySlots : IngameSlots
         Spawn3();    
     }
     void Spawn(int E)
-    {
+    {//"Spawn" Generiert ein random Pet auf der angegebenen Stelle dabei entspricht Zahl=+1. Enemy = die angegebene Zahl
         {
             {
                 int Eingabe = Random.Range(0, AnzahlPets);
@@ -29,15 +29,9 @@ public class EnemySlots : IngameSlots
             }
         }
     }
-    private void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.Escape))
-        {
-            Spawn3();
-        }
-    }
     public void Spawn3()
     {
+        //Spawn wird 3x ausgeführt
         for (int i = 0; i < 3; i++)
         {
             Spawn(i);
@@ -45,6 +39,16 @@ public class EnemySlots : IngameSlots
         F.EnemyPet[0].SetActive(true);
         F.EnemyPet[1].SetActive(true);
         F.EnemyPet[2].SetActive(true);
+        F.Runde++;
+        print(F.Runde + ". Runde");
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            Spawn3();
+        }
     }
 }
 

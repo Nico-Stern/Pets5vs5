@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddf19ca68db70044932482c9167d2d1, type: 3}
   m_Name: Nr3
   m_EditorClassIdentifier: 
-  Name: Hamster
+  Name: (\ /)              ( -.-)        o(")(")o
   Hp: 4
   AttackDmg: 1
   Level: 1

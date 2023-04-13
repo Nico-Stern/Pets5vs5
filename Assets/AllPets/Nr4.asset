@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ddf19ca68db70044932482c9167d2d1, type: 3}
-  m_Name: Nr2
+  m_Name: Nr4
   m_EditorClassIdentifier: 
-  Name: ',   ,          0,0           (,, ,,)'
+  Name: "<(\xF2)_                    .    (  > )*"
   Hp: 2
-  AttackDmg: 4
+  AttackDmg: 2
   Level: 1
   Body: {fileID: 0}
   Details: {fileID: 0}

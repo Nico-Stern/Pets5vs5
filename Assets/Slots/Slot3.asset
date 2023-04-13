@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Slot3
   m_EditorClassIdentifier: 
   Name: Nr3
+  StartHp: 3
   Hp: 3
   AttackDmg: 3
   Level: 1
