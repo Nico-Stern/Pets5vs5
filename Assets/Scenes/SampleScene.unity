@@ -1265,9 +1265,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeBetweenAction: 1
   Arrow:
-  - {fileID: 786172752}
-  - {fileID: 1500860516}
   - {fileID: 1505273019}
+  - {fileID: 1500860516}
+  - {fileID: 786172752}
   Number1IsPressed: 0
   Number2IsPressed: 0
   Number3IsPressed: 0
@@ -1279,6 +1279,7 @@ MonoBehaviour:
   - {fileID: 840063102}
   - {fileID: 1624090544}
   - {fileID: 692857925}
+  StartButton: {fileID: 1530106835}
   DmgOnPlayerPet: 000000000000000000000000
   DmgOnE1FromPlayer: 000000000000000000000000
   DmgOnE2FromPlayer: 000000000000000000000000

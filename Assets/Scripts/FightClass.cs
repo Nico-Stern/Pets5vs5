@@ -15,6 +15,7 @@ public class FightClass : MonoBehaviour
     public bool Number3IsPressed;
     public GameObject[] EnemyPet;
     public GameObject[] PlayerPet;
+    public GameObject StartButton;
     public int[] DmgOnPlayerPet;
 
     public int[] DmgOnE1FromPlayer;
@@ -117,24 +118,33 @@ public class FightClass : MonoBehaviour
         //if playerpet[i]hp kleiner als 1 dann button[i] deaktivieren
         //if all dead new scene
         Player.AllInfos();
+
+        for (int a = 0; a < 3; a++)
+        {
+            if (Player.Pet[a].Hp <= 0)
+            {
+                
+                PlayerPet[a].SetActive(false);
+            }
+        }
     }
 
     public void OneChoosing()
-    {//Wenn der Button des ersten PlayerPets betätigt wird setzt sich "Number1" Aktiv. Später für den Angriff wichtig
+    {//Wenn der Button des ersten PlayerPets betï¿½tigt wird setzt sich "Number1" Aktiv. Spï¿½ter fï¿½r den Angriff wichtig
         Number1IsPressed = true;
         Number2IsPressed = false;
         Number3IsPressed = false;      
     }
 
     public void TwoChoosing()
-    {//Wenn der Button des zweiten PlayerPets betätigt wird setzt sich "Number2" Aktiv. Später für den Angriff wichtig
+    {//Wenn der Button des zweiten PlayerPets betï¿½tigt wird setzt sich "Number2" Aktiv. Spï¿½ter fï¿½r den Angriff wichtig
         Number1IsPressed = false;
         Number2IsPressed = true;
         Number3IsPressed = false;      
     }
 
     public void ThreeChoosing()
-    {//Wenn der Button des dritten PlayerPets betätigt wird setzt sich "Number3" Aktiv. Später für den Angriff wichtig
+    {//Wenn der Button des dritten PlayerPets betï¿½tigt wird setzt sich "Number3" Aktiv. Spï¿½ter fï¿½r den Angriff wichtig
         Number1IsPressed = false;
         Number2IsPressed = false;
         Number3IsPressed = true;      
@@ -176,20 +186,21 @@ public class FightClass : MonoBehaviour
         int Turn = 2;
         if (Player.Pet[Turn].Hp > 0)
         {
-        yield return new WaitForSeconds(TimeBetweenAction);
-        PlayerAttack(Turn);
+            yield return new WaitForSeconds(TimeBetweenAction);
+            PlayerAttack(Turn);
             yield return new WaitForSeconds(TimeBetweenAction);
             EneemyHpCheck();
         }
 
+        Arrow[2].SetActive(false);
         //Enemy 3 greift an
-        if (E.EnemyHp[Turn]>0)
+        if (E.EnemyHp[Turn] > 0)
         {
             yield return new WaitForSeconds(TimeBetweenAction);
             EnemyIsChoosing(Turn);
         }
 
-        Turn=1;
+        Turn = 1;
         //Player 2 greift an
         if (Player.Pet[Turn].Hp > 0)
         {
@@ -199,6 +210,7 @@ public class FightClass : MonoBehaviour
             EneemyHpCheck();
         }
 
+        Arrow[1].SetActive(false);
         //Enemy 2 greift an
         if (E.EnemyHp[Turn] > 0)
         {
@@ -216,6 +228,7 @@ public class FightClass : MonoBehaviour
             EneemyHpCheck();
         }
 
+        Arrow[0].SetActive(false);
         //Enemy 1 greift an
         if (E.EnemyHp[Turn] > 0)
         {
@@ -223,37 +236,40 @@ public class FightClass : MonoBehaviour
             EnemyIsChoosing(Turn);
         }
 
-        //Attackenschaden wird zurückgesetzt
-            DmgOnE1FromPlayer[0] = 0; DmgOnE1FromPlayer[1] = 0; DmgOnE1FromPlayer[2]=0;
-            DmgOnE2FromPlayer[0] = 0; DmgOnE2FromPlayer[1] = 0; DmgOnE2FromPlayer[2] = 0;
-            DmgOnE3FromPlayer[0] = 0; DmgOnE3FromPlayer[1] =0; DmgOnE3FromPlayer[2] = 0;
+        //Attackenschaden wird zurï¿½ckgesetzt
+        DmgOnE1FromPlayer[0] = 0;
+        DmgOnE1FromPlayer[1] = 0;
+        DmgOnE1FromPlayer[2] = 0;
+        DmgOnE2FromPlayer[0] = 0;
+        DmgOnE2FromPlayer[1] = 0;
+        DmgOnE2FromPlayer[2] = 0;
+        DmgOnE3FromPlayer[0] = 0;
+        DmgOnE3FromPlayer[1] = 0;
+        DmgOnE3FromPlayer[2] = 0;
 
-            //Die Pfeile die zeigen wer wenn angreift werden zurück gesetzt
-            Arrow[0].transform.rotation = new Quaternion(0, 0, 0, 0);
-            Arrow[0].transform.localPosition = Vector3.zero;
+        //Die Pfeile die zeigen wer wenn angreift werden zurï¿½ck gesetzt
+        Arrow[0].transform.rotation = new Quaternion(0, 0, 0, 0);
+        Arrow[0].transform.localPosition = Vector3.zero;
 
-            Arrow[1].transform.rotation = new Quaternion(0, 0, 0, 0);
-            Arrow[1].transform.localPosition = Vector3.zero;
+        Arrow[1].transform.rotation = new Quaternion(0, 0, 0, 0);
+        Arrow[1].transform.localPosition = Vector3.zero;
 
-            Arrow[2].transform.rotation = new Quaternion(0, 0, 0, 0);
-            Arrow[2].transform.localPosition = Vector3.zero;
-
-            //Die Pfeile werden deaktiviert
-            Arrow[0].SetActive(false);
-            Arrow[1].SetActive(false);
-            Arrow[2].SetActive(false);
-
-            
-            AttackOn[0] = 0;
-            AttackOn[1] = 0;
-            AttackOn[2] = 0;
+        Arrow[2].transform.rotation = new Quaternion(0, 0, 0, 0);
+        Arrow[2].transform.localPosition = Vector3.zero;
 
 
-            if (E.EnemyHp[0] <= 0 && E.EnemyHp[1] <= 0 && E.EnemyHp[2] <= 0)
-            {
+
+
+        AttackOn[0] = 0;
+        AttackOn[1] = 0;
+        AttackOn[2] = 0;
+
+
+        if (E.EnemyHp[0] <= 0 && E.EnemyHp[1] <= 0 && E.EnemyHp[2] <= 0)
+        {
             yield return new WaitForSeconds(TimeBetweenAction);
             E.Spawn3();
-            }
+        }
 
         EnemyPet[0].GetComponent<Button>().interactable = true;
         EnemyPet[1].GetComponent<Button>().interactable = true;
@@ -263,105 +279,8 @@ public class FightClass : MonoBehaviour
         PlayerPet[1].GetComponent<Button>().interactable = true;
         PlayerPet[2].GetComponent<Button>().interactable = true;
 
-        //endsachen raus holen!
-        /* KIChosing();
-         int DmgOn3 = P1Dmg[2] + P2Dmg[2] + P3Dmg[2];
-          if (DmgOn3!= 0)//Funktion schreiben
-          {
-          yield return new WaitForSeconds(ZeitZwischenAtt);
-             E.EnemyHp[2] -= P3Dmg[2];
-             E.EnemyHp[2] -= P2Dmg[2];
-             E.EnemyHp[2] -= P1Dmg[2];
-             E.InfoTextHp[2].text = E.EnemyHp[2].ToString();
-          yield return new WaitForSeconds(ZeitZwischenAtt);
-              if (E.EnemyHp[2]<=0)
-              {
-                  EnemyPet[2].SetActive(false);
-              }
-          }
+        StartButton.SetActive(true);
 
-         if (AttackOn[2] != 0)
-         {
-             yield return new WaitForSeconds(ZeitZwischenAtt);
-             P.Pet[2].Hp -= AttackOn[2];
-             P.InfoTextHp[2].text = P.Pet[2].Hp.ToString();
-             yield return new WaitForSeconds(ZeitZwischenAtt);
-         }
-          //SpielerLeben
-          //Zeit
-
-
-          if (P1Dmg[1] != 0 && P2Dmg[1] != 0 && P3Dmg[1] != 0)
-          {
-              yield return new WaitForSeconds(ZeitZwischenAtt);
-             E.EnemyHp[1] -= P3Dmg[1];
-             E.EnemyHp[1] -= P2Dmg[1];
-             E.EnemyHp[1] -= P1Dmg[1];
-             E.InfoTextHp[1].text = E.EnemyHp[1].ToString();
-              yield return new WaitForSeconds(ZeitZwischenAtt);
-              if (E.EnemyHp[1] <= 0)
-              {
-                  EnemyPet[1].SetActive(false);
-              }
-          }
-
-         if (AttackOn[1] != 0)
-         {
-             yield return new WaitForSeconds(ZeitZwischenAtt);
-             P.Pet[1].Hp -= AttackOn[1];
-             P.InfoTextHp[1].text = P.Pet[1].Hp.ToString();
-             yield return new WaitForSeconds(ZeitZwischenAtt);
-         }
-         //SpielerLeben
-         //Zeit
-         if (P1Dmg[0] != 0 && P2Dmg[0] != 0 && P3Dmg[0] != 0)
-          {
-              yield return new WaitForSeconds(ZeitZwischenAtt);
-             E.EnemyHp[0] -= P3Dmg[0];
-             E.EnemyHp[0] -= P2Dmg[0];
-             E.EnemyHp[0] -= P1Dmg[0];
-             E.InfoTextHp[0].text = E.EnemyHp[0].ToString();
-              yield return new WaitForSeconds(ZeitZwischenAtt);
-              if (E.EnemyHp[0] <= 0)
-              {
-                  EnemyPet[0].SetActive(false);
-              }
-          }
-
-         if (AttackOn[0] != 0)
-         {
-             yield return new WaitForSeconds(ZeitZwischenAtt);
-             P.Pet[0].Hp -= AttackOn[0];
-             P.InfoTextHp[0].text = P.Pet[0].Hp.ToString();
-             yield return new WaitForSeconds(ZeitZwischenAtt);
-         }
-         //SpielerLeben
-         //Zeit
-         Attack1 = false; Attack2= false; Attack3 = false;
-         DmgOn[0] = 0; DmgOn[1]=0; DmgOn[2] = 0;
-         Arrows[0].transform.rotation=new Quaternion(0,0,0,0); 
-         Arrows[0].transform.localPosition = Vector3.zero;
-
-         Arrows[1].transform.rotation = new Quaternion(0, 0, 0, 0);
-         Arrows[1].transform.localPosition = Vector3.zero;
-
-         Arrows[2].transform.rotation = new Quaternion(0, 0, 0, 0);
-         Arrows[2].transform.localPosition = Vector3.zero;
-
-         Arrows[0].SetActive(false) ;
-         Arrows[1].SetActive(false) ;
-         Arrows[2].SetActive(false) ;
-
-         AttackOn[0] = 0;
-         AttackOn[1] = 0;
-         AttackOn[2] = 0;
-
-         yield return new WaitForSeconds(ZeitZwischenAtt);
-
-         if (E.EnemyHp[0]<=0&& E.EnemyHp[1] <= 0&& E.EnemyHp[2] <= 0)
-         {
-             E.Spawn3();
-         }*/
     }
 
     public void Att1(int a)
@@ -467,6 +386,8 @@ public class FightClass : MonoBehaviour
 
     public void ReadyButton()
     {
+        StartButton.SetActive(false);
+        
         EnemyPet[0].GetComponent<Button>().interactable = false;
         EnemyPet[1].GetComponent<Button>().interactable = false;
         EnemyPet[2].GetComponent<Button>().interactable = false;
