@@ -182,6 +182,9 @@ public class FightClass : MonoBehaviour
 
     public IEnumerator Ready()
     {
+        
+        
+       
         //Player 3 greift an
         int Turn = 2;
         if (Player.Pet[Turn].Hp > 0)
