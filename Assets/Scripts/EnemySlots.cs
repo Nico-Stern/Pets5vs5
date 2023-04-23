@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnemySlots : IngameSlots
 {
+    public CoinsBank CB;
     public Pets[] AllPets;
     public string[] EnemyName;
     public int[] EnemyHp;
@@ -48,6 +49,12 @@ public class EnemySlots : IngameSlots
         {
             Spawn3();
         }
+    }
+
+    public void EnemyDeath()
+    {
+        int Coins = Random.Range(0, 4);
+        CB.RoundCoins += Coins;
     }
 }
 

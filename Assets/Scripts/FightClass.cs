@@ -155,9 +155,30 @@ public class FightClass : MonoBehaviour
         int PDmgOn = DmgOnE1FromPlayer[i] + DmgOnE2FromPlayer[i] + DmgOnE3FromPlayer[i];
         if (PDmgOn != 0)
         {
-            E.EnemyHp[2] -= DmgOnE3FromPlayer[i];//i=Player
-            E.EnemyHp[1] -= DmgOnE2FromPlayer[i];//i=Player
-            E.EnemyHp[0] -= DmgOnE1FromPlayer[i];//i=Player
+            if (E.EnemyHp[2] > 0)
+            {
+                E.EnemyHp[2] -= DmgOnE3FromPlayer[i];//i=Player
+                if(E.EnemyHp[2] <= 0)
+                {
+                    E.EnemyDeath();
+                }
+            }
+            if (E.EnemyHp[1] > 0)
+            {
+                E.EnemyHp[1] -= DmgOnE2FromPlayer[i];//i=Player
+                if (E.EnemyHp[1] <= 0)
+                {
+                    E.EnemyDeath();
+                }
+            }
+            if (E.EnemyHp[0] > 0)
+            {
+                E.EnemyHp[0] -= DmgOnE1FromPlayer[i];//i=Player
+                if (E.EnemyHp[0] <= 0)
+                {
+                    E.EnemyDeath();
+                }
+            }
             E.InfoTextHp[2].text = E.EnemyHp[2].ToString();
             E.InfoTextHp[1].text = E.EnemyHp[1].ToString();
             E.InfoTextHp[0].text = E.EnemyHp[0].ToString();
@@ -176,69 +197,31 @@ public class FightClass : MonoBehaviour
         }
         if (E.EnemyHp[2] <= 0)
         {
-            EnemyPet[2].SetActive(false);
+            EnemyPet[2].SetActive(false);           
         }
     }
 
     public IEnumerator Ready()
-    {
-        
-        
-       
-        //Player 3 greift an
-        int Turn = 2;
-        if (Player.Pet[Turn].Hp > 0)
+    {      
+        for (int Turn =2; Turn >-1; Turn--)
         {
-            yield return new WaitForSeconds(TimeBetweenAction);
-            PlayerAttack(Turn);
-            yield return new WaitForSeconds(TimeBetweenAction);
-            EneemyHpCheck();
-        }
+             if (Player.Pet[Turn].Hp > 0)
+             {
+                 yield return new WaitForSeconds(TimeBetweenAction);
+                 PlayerAttack(Turn);
+                 yield return new WaitForSeconds(TimeBetweenAction);
+                 EneemyHpCheck();
+             }
 
-        Arrow[2].SetActive(false);
-        //Enemy 3 greift an
-        if (E.EnemyHp[Turn] > 0)
-        {
-            yield return new WaitForSeconds(TimeBetweenAction);
-            EnemyIsChoosing(Turn);
+             Arrow[Turn].SetActive(false);
+             //Enemy 3 greift an
+             if (E.EnemyHp[Turn] > 0)
+             {
+                 yield return new WaitForSeconds(TimeBetweenAction);
+                 EnemyIsChoosing(Turn);
+             }     
         }
-
-        Turn = 1;
-        //Player 2 greift an
-        if (Player.Pet[Turn].Hp > 0)
-        {
-            yield return new WaitForSeconds(TimeBetweenAction);
-            PlayerAttack(Turn);
-            yield return new WaitForSeconds(TimeBetweenAction);
-            EneemyHpCheck();
-        }
-
-        Arrow[1].SetActive(false);
-        //Enemy 2 greift an
-        if (E.EnemyHp[Turn] > 0)
-        {
-            yield return new WaitForSeconds(TimeBetweenAction);
-            EnemyIsChoosing(Turn);
-        }
-
-        Turn = 0;
-        //Player 1 greift an
-        if (Player.Pet[Turn].Hp > 0)
-        {
-            yield return new WaitForSeconds(TimeBetweenAction);
-            PlayerAttack(Turn);
-            yield return new WaitForSeconds(TimeBetweenAction);
-            EneemyHpCheck();
-        }
-
-        Arrow[0].SetActive(false);
-        //Enemy 1 greift an
-        if (E.EnemyHp[Turn] > 0)
-        {
-            yield return new WaitForSeconds(TimeBetweenAction);
-            EnemyIsChoosing(Turn);
-        }
-
+      
         //Attackenschaden wird zur�ckgesetzt
         DmgOnE1FromPlayer[0] = 0;
         DmgOnE1FromPlayer[1] = 0;
@@ -259,9 +242,6 @@ public class FightClass : MonoBehaviour
 
         Arrow[2].transform.rotation = new Quaternion(0, 0, 0, 0);
         Arrow[2].transform.localPosition = Vector3.zero;
-
-
-
 
         AttackOn[0] = 0;
         AttackOn[1] = 0;
