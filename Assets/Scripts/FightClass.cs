@@ -205,12 +205,16 @@ public class FightClass : MonoBehaviour
     {      
         for (int Turn =2; Turn >-1; Turn--)
         {
-             if (Player.Pet[Turn].Hp > 0)
+             if (Player.Pet[Turn].Hp > 0&&(DmgOnE1FromPlayer[Turn] != 0||DmgOnE2FromPlayer[Turn] != 0||DmgOnE3FromPlayer[Turn] != 0))
              {
                  yield return new WaitForSeconds(TimeBetweenAction);
                  PlayerAttack(Turn);
                  yield return new WaitForSeconds(TimeBetweenAction);
                  EneemyHpCheck();
+             }
+             else
+             {
+                 yield return new WaitForSeconds(TimeBetweenAction);
              }
 
              Arrow[Turn].SetActive(false);

@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 225934280}
   - component: {fileID: 225934279}
   - component: {fileID: 225934278}
+  - component: {fileID: 225934281}
   m_Layer: 5
   m_Name: BackToMenu
   m_TagString: Untagged
@@ -221,7 +222,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 225934279}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 225934281}
+        m_TargetAssemblyTypeName: BackToMenu, Assembly-CSharp
+        m_MethodName: backToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &225934279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +273,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225934276}
   m_CullTransparentMesh: 1
+--- !u!114 &225934281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225934276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777d741b66ed0b14788b917e8aa151e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &251012778 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4680623073555492029, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
@@ -851,7 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.77431715, g: 0.8207547, b: 0.46844962, a: 1}
+  m_Color: {r: 0.81674975, g: 0.8962264, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -916,7 +941,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
+  m_BackGroundColor: {r: 0.3490566, g: 0.25188997, b: 0.21569064, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/CoinsTracker.unity
+    guid: 0506c99f9d214754a913b74bebc256f2
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 8f0fabd27df2fe8469a3c79554c79367
   m_configObjects: {}
