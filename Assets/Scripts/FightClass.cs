@@ -388,12 +388,12 @@ public class FightClass : MonoBehaviour
             if (Player.Pet[Choosing].Hp <= 0)
             {
                 Choosing--;
-                if (Choosing < 0)
-                {
-                    ReadyButton();
-                }
+                ChoosingRotine();
             }
-            IsPressed[Choosing] = true;
+            else
+            {
+                IsPressed[Choosing] = true;
+            }
         }
     }
 }
