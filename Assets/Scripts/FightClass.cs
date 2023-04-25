@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
@@ -9,10 +10,10 @@ public class FightClass : MonoBehaviour
     public float TimeBetweenAction = 1f;
 
     public GameObject[] Arrow;
-
-    public bool Number1IsPressed;
-    public bool Number2IsPressed;
-    public bool Number3IsPressed;
+    
+    public bool[] IsPressed;
+    private int Choosing;
+    
     public GameObject[] EnemyPet;
     public GameObject[] PlayerPet;
     public GameObject StartButton;
@@ -52,6 +53,17 @@ public class FightClass : MonoBehaviour
         PlayerNamesList.Add(Player.Pet[2].Name);//Nr3
 
         Runde = 0;
+
+        PlayerPet[0].GetComponent<Button>().interactable = false;
+        PlayerPet[1].GetComponent<Button>().interactable = false;
+        PlayerPet[2].GetComponent<Button>().interactable = false;
+        
+        IsPressed[2] = false;
+        IsPressed[1] = false;
+        IsPressed[0] = false;
+
+        Choosing = 2;
+        ChoosingRotine();
     }
 
     public void EnemyIsChoosing(int i)
@@ -129,27 +141,6 @@ public class FightClass : MonoBehaviour
         }
     }
 
-    public void OneChoosing()
-    {//Wenn der Button des ersten PlayerPets bet�tigt wird setzt sich "Number1" Aktiv. Sp�ter f�r den Angriff wichtig
-        Number1IsPressed = true;
-        Number2IsPressed = false;
-        Number3IsPressed = false;      
-    }
-
-    public void TwoChoosing()
-    {//Wenn der Button des zweiten PlayerPets bet�tigt wird setzt sich "Number2" Aktiv. Sp�ter f�r den Angriff wichtig
-        Number1IsPressed = false;
-        Number2IsPressed = true;
-        Number3IsPressed = false;      
-    }
-
-    public void ThreeChoosing()
-    {//Wenn der Button des dritten PlayerPets bet�tigt wird setzt sich "Number3" Aktiv. Sp�ter f�r den Angriff wichtig
-        Number1IsPressed = false;
-        Number2IsPressed = false;
-        Number3IsPressed = true;      
-    }
-    
     public void PlayerAttack(int i)
     {      
         int PDmgOn = DmgOnE1FromPlayer[i] + DmgOnE2FromPlayer[i] + DmgOnE3FromPlayer[i];
@@ -257,27 +248,23 @@ public class FightClass : MonoBehaviour
             yield return new WaitForSeconds(TimeBetweenAction);
             E.Spawn3();
         }
-
+        
+        Choosing = 2;
+        
         EnemyPet[0].GetComponent<Button>().interactable = true;
         EnemyPet[1].GetComponent<Button>().interactable = true;
         EnemyPet[2].GetComponent<Button>().interactable = true;
 
-        PlayerPet[0].GetComponent<Button>().interactable = true;
-        PlayerPet[1].GetComponent<Button>().interactable = true;
-        PlayerPet[2].GetComponent<Button>().interactable = true;
-
         StartButton.SetActive(true);
-
+        
+        ChoosingRotine();
     }
 
     public void Att1(int a)
     {
-        if (Number1IsPressed)
+        if (IsPressed[0])
         {
-            /*if(a==2){E3Dmg[0] += P.Pet[0].AttackDmg;}
-             if(a==1){E2Dmg[0] += P.Pet[0].AttackDmg;}
-            if(a==0){E1Dmg[0] += P.Pet[0].AttackDmg;}*/
-            Number1IsPressed= false;
+            IsPressed[0]= false;
             PlayerPet[0].GetComponent<Button>().interactable = false;
             Arrow[0].SetActive(true);
             if(a==2)
@@ -299,9 +286,9 @@ public class FightClass : MonoBehaviour
         }
         else
         {
-            if (Number2IsPressed)
+            if (IsPressed[1])
             {
-                Number2IsPressed = false;
+                IsPressed[1] = false;
                 PlayerPet[1].GetComponent<Button>().interactable = false;
                 Arrow[1].SetActive(true);
                 if (a == 2)
@@ -324,9 +311,9 @@ public class FightClass : MonoBehaviour
             }
             else
             {
-                if (Number3IsPressed)
+                if (IsPressed[2])
                 {
-                    Number3IsPressed = false;
+                    IsPressed[2] = false;
                     PlayerPet[2].GetComponent<Button>().interactable = false;
                     Arrow[2].SetActive(true);
                     if (a == 2)
@@ -354,6 +341,10 @@ public class FightClass : MonoBehaviour
                 }
             }
         }
+
+        IsPressed[Choosing] = false;
+        Choosing--;
+        ChoosingRotine();
     }
 
     public IEnumerator AttackEnemy(int i)
@@ -379,10 +370,30 @@ public class FightClass : MonoBehaviour
         EnemyPet[1].GetComponent<Button>().interactable = false;
         EnemyPet[2].GetComponent<Button>().interactable = false;
 
-        PlayerPet[0].GetComponent<Button>().interactable = false;
-        PlayerPet[1].GetComponent<Button>().interactable = false;
-        PlayerPet[2].GetComponent<Button>().interactable = false;
+        
         StartCoroutine(Ready());
         //Wenn Angegriffen wid
+    }
+
+    
+    //Neues Kampfsystem 2,1,0
+    public void ChoosingRotine()
+    {
+        if (Choosing < 0)
+        {
+            ReadyButton();
+        }
+        else
+        {
+            if (Player.Pet[Choosing].Hp <= 0)
+            {
+                Choosing--;
+                if (Choosing < 0)
+                {
+                    ReadyButton();
+                }
+            }
+            IsPressed[Choosing] = true;
+        }
     }
 }

@@ -1577,6 +1577,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 0.09803922
       objectReference: {fileID: 0}
@@ -1810,9 +1814,7 @@ MonoBehaviour:
   - {fileID: 1505273019}
   - {fileID: 1500860516}
   - {fileID: 786172752}
-  Number1IsPressed: 0
-  Number2IsPressed: 0
-  Number3IsPressed: 0
+  IsPressed: 000000
   EnemyPet:
   - {fileID: 482267037}
   - {fileID: 2033109692}
@@ -2399,6 +2401,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 0.09803922
       objectReference: {fileID: 0}
@@ -2444,9 +2450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4680623073555492029, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Text
-      value: '.---.                    i      i
-
-'
+      value: .---.                    i0  0i           .
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
@@ -2864,6 +2868,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4680623072947494916, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Transition
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
