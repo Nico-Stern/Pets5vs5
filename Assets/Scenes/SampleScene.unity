@@ -158,7 +158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &225934277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -560,6 +560,18 @@ PrefabInstance:
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Colors.m_NormalColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.3679245
       objectReference: {fileID: 0}
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
@@ -1127,6 +1139,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 1
       objectReference: {fileID: 0}
@@ -1357,6 +1381,18 @@ PrefabInstance:
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Colors.m_NormalColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.3679245
       objectReference: {fileID: 0}
     - target: {fileID: 4680623072947494917, guid: 2d5670be77ef90245904f21f956bfed2, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
@@ -1823,6 +1859,7 @@ MonoBehaviour:
   - {fileID: 840063102}
   - {fileID: 1624090544}
   - {fileID: 692857925}
+  forward: 1
   StartButton: {fileID: 1530106835}
   DmgOnPlayerPet: 000000000000000000000000
   DmgOnE1FromPlayer: 000000000000000000000000
@@ -2001,8 +2038,8 @@ Canvas:
   m_GameObject: {fileID: 1253109501}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -2161,7 +2198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1530106836
 RectTransform:
   m_ObjectHideFlags: 0

@@ -16,6 +16,9 @@ public class FightClass : MonoBehaviour
     
     public GameObject[] EnemyPet;
     public GameObject[] PlayerPet;
+
+    [SerializeField] private float forward = 10f;
+
     public GameObject StartButton;
     public int[] DmgOnPlayerPet;
 
@@ -341,7 +344,7 @@ public class FightClass : MonoBehaviour
                 }
             }
         }
-
+        PlayerPet[Choosing].transform.position = PlayerPet[Choosing].transform.position + Vector3.right * -forward;
         IsPressed[Choosing] = false;
         Choosing--;
         ChoosingRotine();
@@ -393,6 +396,7 @@ public class FightClass : MonoBehaviour
             else
             {
                 IsPressed[Choosing] = true;
+                PlayerPet[Choosing].transform.position = PlayerPet[Choosing].transform.position + Vector3.right * forward;
             }
         }
     }
