@@ -258,7 +258,7 @@ public class FightClass : MonoBehaviour
         EnemyPet[1].GetComponent<Button>().interactable = true;
         EnemyPet[2].GetComponent<Button>().interactable = true;
 
-        StartButton.SetActive(true);
+        //StartButton.SetActive(true);
         
         ChoosingRotine();
     }
