@@ -28,6 +28,8 @@ public class FightClass : MonoBehaviour
 
     public int a;
 
+    public bool[] SearchingGold;
+
     public int[] AttackOn;
 
     public int Runde;
@@ -36,6 +38,7 @@ public class FightClass : MonoBehaviour
     public EnemySlots E;
     public List<int> PlayerHpList = new List<int>();
     public List<string> PlayerNamesList = new List<string>();
+    public CoinsBank CB;
 
     public void Awake()
     {//Pfeile die Anzeigen Welchesd Pet den gegner angreift werden inaktiv gesetzt
@@ -209,6 +212,14 @@ public class FightClass : MonoBehaviour
              else
              {
                  yield return new WaitForSeconds(TimeBetweenAction);
+                 if (SearchingGold[Turn] == true && Player.Pet[Turn].Hp > 0)
+                 {
+                     int Eingabe = Random.Range(0, 3);
+                     CB.RoundCoins += Eingabe;
+                     print(Eingabe+" Coins gefunden");
+                     SearchingGold[Turn] = false;
+                 }
+                 yield return new WaitForSeconds(TimeBetweenAction);
              }
 
              Arrow[Turn].SetActive(false);
@@ -269,7 +280,15 @@ public class FightClass : MonoBehaviour
         {
             IsPressed[0]= false;
             PlayerPet[0].GetComponent<Button>().interactable = false;
-            Arrow[0].SetActive(true);
+            if (a < 3)
+            {
+                Arrow[0].SetActive(true);
+            }
+            
+            if (a == 3)
+            {
+                SearchingGold[0] = true;
+            }
             if(a==2)
             {
                 DmgOnE3FromPlayer[0] += Player.Pet[0].AttackDmg;
@@ -293,7 +312,14 @@ public class FightClass : MonoBehaviour
             {
                 IsPressed[1] = false;
                 PlayerPet[1].GetComponent<Button>().interactable = false;
-                Arrow[1].SetActive(true);
+                if (a < 3)
+                {
+                    Arrow[1].SetActive(true);
+                }
+                if (a == 3)
+                {
+                    SearchingGold[1] = true;
+                }
                 if (a == 2)
                 {
                     DmgOnE3FromPlayer[1] += Player.Pet[1].AttackDmg;
@@ -318,7 +344,14 @@ public class FightClass : MonoBehaviour
                 {
                     IsPressed[2] = false;
                     PlayerPet[2].GetComponent<Button>().interactable = false;
-                    Arrow[2].SetActive(true);
+                    if (a < 3)
+                    {
+                        Arrow[2].SetActive(true);
+                    }
+                    if (a == 3)
+                    {
+                        SearchingGold[2] = true;
+                    }
                     if (a == 2)
                     {
                         DmgOnE3FromPlayer[2] += Player.Pet[2].AttackDmg;
