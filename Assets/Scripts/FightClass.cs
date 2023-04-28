@@ -141,7 +141,7 @@ public class FightClass : MonoBehaviour
         {
             if (Player.Pet[a].Hp <= 0)
             {
-                
+                SearchingGold[a] = false;
                 PlayerPet[a].SetActive(false);
             }
         }
@@ -202,6 +202,7 @@ public class FightClass : MonoBehaviour
     {      
         for (int Turn =2; Turn >-1; Turn--)
         {
+            
              if (Player.Pet[Turn].Hp > 0&&(DmgOnE1FromPlayer[Turn] != 0||DmgOnE2FromPlayer[Turn] != 0||DmgOnE3FromPlayer[Turn] != 0))
              {
                  yield return new WaitForSeconds(TimeBetweenAction);
@@ -216,7 +217,7 @@ public class FightClass : MonoBehaviour
                  {
                      int Eingabe = Random.Range(0, 3);
                      CB.RoundCoins += Eingabe;
-                     print(Eingabe+" Coins gefunden");
+                     print(Eingabe+" Coins found");
                      SearchingGold[Turn] = false;
                  }
                  yield return new WaitForSeconds(TimeBetweenAction);
