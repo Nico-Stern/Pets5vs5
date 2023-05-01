@@ -473,5 +473,61 @@ public class FightClass : MonoBehaviour
         E.Spawn3();
 
         //hp machen
+        if (PlayerHpList.Count == 3)
+        {
+            //Alle Leben
+            PlayerHpList[0] = Player.Pet[0].Hp;
+            PlayerHpList[1] = Player.Pet[1].Hp;
+            PlayerHpList[2] = Player.Pet[2].Hp;
+        }
+        else
+        {
+            if(PlayerHpList.Count==2)
+            {
+                if (PlayerNamesList[1] == Player.Pet[1].Name)
+                {
+                    //palyer1 und player2 leben
+                    PlayerHpList[0] = Player.Pet[0].Hp;
+                    PlayerHpList[1] = Player.Pet[1].Hp;
+                }
+                else
+                {
+                    if(PlayerNamesList[0] == Player.Pet[0].Name)
+                    {
+                        //player1 Lebt
+                        //player2 tot
+                        PlayerHpList[0] = Player.Pet[0].Hp;
+                        PlayerHpList[1] = Player.Pet[2].Hp;
+                    }
+                    else
+                    {
+                        //player1 tot
+                        //player2 Lebt
+                        PlayerHpList[0] = Player.Pet[1].Hp;
+                        PlayerHpList[1] = Player.Pet[2].Hp;
+                    }
+                }
+                
+            }
+            else
+            {
+                //1player lebt
+                if (PlayerNamesList[0] == Player.Pet[0].Name)
+                {
+                    //player1 lebt
+                    PlayerHpList[0]= Player.Pet[0].Hp;
+                }
+                if (PlayerNamesList[0] == Player.Pet[1].Name)
+                {
+                    //player2 lebt
+                    PlayerHpList[0] = Player.Pet[1].Hp;
+                }
+                if (PlayerNamesList[0] == Player.Pet[2].Name)
+                {
+                    //player3 lebt
+                    PlayerHpList[0] = Player.Pet[2].Hp;
+                }
+            }
+        }
     }
 }
