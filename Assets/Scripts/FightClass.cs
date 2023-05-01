@@ -471,5 +471,7 @@ public class FightClass : MonoBehaviour
         StartNextRound();
         PreroundShop.SetActive(false);
         E.Spawn3();
+
+        //hp machen
     }
 }
