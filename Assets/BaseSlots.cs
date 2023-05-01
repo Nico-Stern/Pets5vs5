@@ -9,6 +9,7 @@ public class BaseSlots : ScriptableObject
     //public string Description;
     public int StartHp;
     public int Hp;
+    public int StartAttackDmg;
     public int AttackDmg;
     public int Level = 1;
     public int LevelEp;

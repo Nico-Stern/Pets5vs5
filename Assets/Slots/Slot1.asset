@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Nr1
   StartHp: 4
-  Hp: -1
+  Hp: 4
+  StartAttackDmg: 1
   AttackDmg: 1
   Level: 1
   LevelEp: 0

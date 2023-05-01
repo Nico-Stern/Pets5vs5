@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using TMPro;
 using UnityEngine.UI;
 
 public class FightClass : MonoBehaviour
 {
+    public PreRoundUpgrades PreShopScript;
+
     public float TimeBetweenAction = 1f;
 
     public GameObject[] Arrow;
+    public GameObject[] EnemyPet;
+    public GameObject[] PlayerPet;
+    public GameObject PreroundShop;
+    public GameObject StartButton;
     
     public bool[] IsPressed;
     private int Choosing;
     
-    public GameObject[] EnemyPet;
-    public GameObject[] PlayerPet;
 
     [SerializeField] private float forward = 10f;
 
-    public GameObject StartButton;
     public int[] DmgOnPlayerPet;
 
     public int[] DmgOnE1FromPlayer;
@@ -42,6 +46,8 @@ public class FightClass : MonoBehaviour
 
     public void Awake()
     {//Pfeile die Anzeigen Welchesd Pet den gegner angreift werden inaktiv gesetzt
+
+        //schleife 
         Arrow[0].SetActive(false);
         Arrow[1].SetActive(false);
         Arrow[2].SetActive(false);
@@ -49,6 +55,10 @@ public class FightClass : MonoBehaviour
         Player.Pet[0].Hp = Player.Pet[0].StartHp;
         Player.Pet[1].Hp = Player.Pet[1].StartHp;
         Player.Pet[2].Hp = Player.Pet[2].StartHp;
+
+        Player.Pet[0].AttackDmg = Player.Pet[0].StartAttackDmg;
+        Player.Pet[1].AttackDmg = Player.Pet[1].StartAttackDmg;
+        Player.Pet[2].AttackDmg = Player.Pet[2].StartAttackDmg;
 
         PlayerHpList.Add(Player.Pet[0].Hp);
         PlayerHpList.Add(Player.Pet[1].Hp);
@@ -67,6 +77,8 @@ public class FightClass : MonoBehaviour
         IsPressed[2] = false;
         IsPressed[1] = false;
         IsPressed[0] = false;
+
+        PreroundShop.SetActive(false);
 
         Choosing = 2;
         ChoosingRotine();
@@ -261,18 +273,26 @@ public class FightClass : MonoBehaviour
         if (E.EnemyHp[0] <= 0 && E.EnemyHp[1] <= 0 && E.EnemyHp[2] <= 0)
         {
             yield return new WaitForSeconds(TimeBetweenAction);
-            E.Spawn3();
-        }
-        
-        Choosing = 2;
-        
-        EnemyPet[0].GetComponent<Button>().interactable = true;
-        EnemyPet[1].GetComponent<Button>().interactable = true;
-        EnemyPet[2].GetComponent<Button>().interactable = true;
+            //E.Spawn3();
 
-        //StartButton.SetActive(true);
-        
-        ChoosingRotine();
+            //Show shop
+            //Dmg kann nur 10 höher als normal
+            //heal nur das was man hat
+            //Wiederbelebung 20. wird aber jede 10. runde teuerer
+            PreroundShop.SetActive(true);
+
+            PlayerPet[0].GetComponent<Button>().interactable = true;
+            PlayerPet[1].GetComponent<Button>().interactable = true;
+            PlayerPet[2].GetComponent<Button>().interactable = true;
+
+            PreShopScript.StartPreRoundShop(0);
+            PreShopScript.StartPreRoundShop(1);
+            PreShopScript.StartPreRoundShop(2);
+        }
+        else
+        {
+            StartNextRound();
+        }
     }
 
     public void Att1(int a)
@@ -293,18 +313,18 @@ public class FightClass : MonoBehaviour
             if(a==2)
             {
                 DmgOnE3FromPlayer[0] += Player.Pet[0].AttackDmg;
-                Arrow[0].transform.Rotate(0, 0, 33);
+                Arrow[0].transform.Rotate(0, 0, 30);
             }
             if (a== 1)
             {
                 DmgOnE2FromPlayer[0] += Player.Pet[0].AttackDmg;
-                Arrow[0].transform.Rotate(0, 0,13);
-                Arrow[0].transform.localPosition=new Vector3(0, -125, 0);
+                Arrow[0].transform.Rotate(0, 0,20);
+                Arrow[0].transform.localPosition=new Vector3(0, -225, 0);
             }
             if(a==0)
             {
                 DmgOnE1FromPlayer[0] += Player.Pet[0].AttackDmg;
-                Arrow[0].transform.localPosition = new Vector3(0, -236, 0);
+                Arrow[0].transform.localPosition = new Vector3(0, -280, 0);
             }
         }
         else
@@ -325,7 +345,7 @@ public class FightClass : MonoBehaviour
                 {
                     DmgOnE3FromPlayer[1] += Player.Pet[1].AttackDmg;
                     Arrow[1].transform.Rotate(0, 0, 20);
-                    Arrow[1].transform.localPosition = new Vector3(0, +125, 0);
+                    Arrow[1].transform.localPosition = new Vector3(0, +100, 0);
                 }
                 if (a == 1)
                 {
@@ -335,8 +355,8 @@ public class FightClass : MonoBehaviour
                 if (a == 0)
                 {
                     DmgOnE1FromPlayer[1] += Player.Pet[1].AttackDmg;
-                    Arrow[1].transform.Rotate(0, 0, -13);
-                    Arrow[1].transform.localPosition = new Vector3(0, -125, 0);
+                    Arrow[1].transform.Rotate(0, 0, -20);
+                    Arrow[1].transform.localPosition = new Vector3(0, -100, 0);
                 }
             }
             else
@@ -357,19 +377,19 @@ public class FightClass : MonoBehaviour
                     {
                         DmgOnE3FromPlayer[2] += Player.Pet[2].AttackDmg;
                         Arrow[2].transform.Rotate(0, 0, 0);
-                        Arrow[2].transform.localPosition = new Vector3(0, +330, 0);
+                        Arrow[2].transform.localPosition = new Vector3(0, +280, 0);
                     }
                     if (a == 1)
                     {
                         DmgOnE2FromPlayer[2] += Player.Pet[2].AttackDmg;
-                        Arrow[2].transform.Rotate(0, 0, -13);
+                        Arrow[2].transform.Rotate(0, 0, -20);
                         Arrow[2].transform.localPosition = new Vector3(0, +225, 0);
                     }
                     if (a == 0)
                     {
                         DmgOnE1FromPlayer[2] += Player.Pet[2].AttackDmg;
                         Arrow[2].transform.localPosition = new Vector3(0, +75, 0);
-                        Arrow[2].transform.Rotate(0, 0, -33);
+                        Arrow[2].transform.Rotate(0, 0, -30);
                     }
                 }
                 else
@@ -401,7 +421,7 @@ public class FightClass : MonoBehaviour
 
     public void ReadyButton()
     {
-        StartButton.SetActive(false);
+        
         
         EnemyPet[0].GetComponent<Button>().interactable = false;
         EnemyPet[1].GetComponent<Button>().interactable = false;
@@ -433,5 +453,23 @@ public class FightClass : MonoBehaviour
                 PlayerPet[Choosing].transform.position = PlayerPet[Choosing].transform.position + Vector3.right * forward;
             }
         }
+    }
+
+    public void StartNextRound()
+    {
+        Choosing = 2;
+
+        EnemyPet[0].GetComponent<Button>().interactable = true;
+        EnemyPet[1].GetComponent<Button>().interactable = true;
+        EnemyPet[2].GetComponent<Button>().interactable = true;
+
+        ChoosingRotine();
+    }
+
+    public void PreRoundReadyButton()
+    {
+        StartNextRound();
+        PreroundShop.SetActive(false);
+        E.Spawn3();
     }
 }
