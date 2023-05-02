@@ -2703,7 +2703,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1530106838}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1107169323}
+        m_TargetAssemblyTypeName: FightClass, Assembly-CSharp
+        m_MethodName: PreRoundReadyButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1530106838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3481,6 +3493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1cc816cf3b62a84ea4b23d255d0dc30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CB: {fileID: 997521488}
+  DmgCost: 10
+  HpCost: 5
   Pet:
   - {fileID: 11400000, guid: cb361abac584457409cfadbe503c7ba6, type: 2}
   - {fileID: 11400000, guid: 74fdbbc26e020ae43b90ab5cfa64da94, type: 2}
