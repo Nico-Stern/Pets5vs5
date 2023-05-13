@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8342ad244b9d94d8c49fab9b70b419, type: 3}
   m_Name: Stroage4
   m_EditorClassIdentifier: 
-  Name: 0              iTi              .jL
+  Name: Nr4
   NormalHp: 4
   NormalAttackDmg: 2
   Level: 1

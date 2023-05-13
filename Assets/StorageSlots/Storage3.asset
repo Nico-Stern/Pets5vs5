@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8342ad244b9d94d8c49fab9b70b419, type: 3}
   m_Name: Storage3
   m_EditorClassIdentifier: 
-  Name: U              iTi            / \
+  Name: Nr3
   NormalHp: 4
   NormalAttackDmg: 1
   Level: 1

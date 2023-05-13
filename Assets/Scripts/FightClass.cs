@@ -268,6 +268,7 @@ public class FightClass : MonoBehaviour
         
         PlayerOneDead();
         PlayerTwoDead();
+        PlayerThreeDead();
         Player.AllInfos();
 
         if (E.EnemyHp[0] <= 0 && E.EnemyHp[1] <= 0 && E.EnemyHp[2] <= 0)
@@ -342,18 +343,27 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].AttackDmg = 0;
             //Level
         }
-
-        
-        else
+        if(Player.Pet[1].Hp <= 0 && Player.Pet[2].Hp <= 0 )
         {
             Player.Pet[1].Name = "";
             Player.Pet[1].StartHp = 0;
             Player.Pet[1].Hp = 0;
             Player.Pet[1].StartAttackDmg = 0;
             Player.Pet[1].AttackDmg = 0;
-            //PlayerThreeDead();
+            
+        }     
+    }
+
+    void PlayerThreeDead()
+    {
+        if(Player.Pet[2].Hp <= 0)
+        {
+            Player.Pet[2].Name = "";
+            Player.Pet[2].StartHp = 0;
+            Player.Pet[2].Hp = 0;
+            Player.Pet[2].StartAttackDmg = 0;
+            Player.Pet[2].AttackDmg = 0;
         }
-        
     }
 
     public void Att1(int a)
