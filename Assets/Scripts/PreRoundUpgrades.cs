@@ -23,6 +23,7 @@ public class PreRoundUpgrades : MonoBehaviour
         DmgSlider[index].maxValue = 10;
         HpSlider[index].maxValue = Pet[index].StartHp;
         HpSlider[index].value = Pet[index].Hp;
+        DmgSlider[index].value = Pet[index].AttackDmg - Pet[index].StartAttackDmg;
     }
 
     public void PlusDmg(int index)

@@ -10,13 +10,16 @@ public class PlayerSlots : IngameSlots
 
     private void Awake()
     {
-        Pet[0].Hp = Pet[0].StartHp;
-        Pet[1].Hp = Pet[1].StartHp;
-        Pet[2].Hp = Pet[2].StartHp;
+        for(int i = 0; i <=2; i++) 
+        {            
+            Pet[i].Name = StorageSlots[i].Name;        
+            Pet[i].StartHp = StorageSlots[i].NormalHp;        
+            Pet[i].StartAttackDmg = StorageSlots[i].NormalAttackDmg;            
+            Pet[i].Hp = Pet[i].StartHp;            
+            Pet[i].AttackDmg = Pet[i].StartAttackDmg;
 
-        Pet[0].AttackDmg = Pet[0].StartAttackDmg;
-        Pet[1].AttackDmg = Pet[1].StartAttackDmg;
-        Pet[2].AttackDmg = Pet[2].StartAttackDmg;
+            print(i + " Pet generiert");
+        }
     }
     public void Start()
     {

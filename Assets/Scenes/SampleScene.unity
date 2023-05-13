@@ -292,6 +292,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4022860510935323040, guid: 7af1bfd65f8eb9849b58f99148a8dd2c, type: 3}
+      propertyPath: m_text
+      value: '0              / | \           / \
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 4753474491472408051, guid: 7af1bfd65f8eb9849b58f99148a8dd2c, type: 3}
       propertyPath: m_Name
       value: PlayerPet3
@@ -898,7 +904,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb361abac584457409cfadbe503c7ba6, type: 2}
   - {fileID: 11400000, guid: 74fdbbc26e020ae43b90ab5cfa64da94, type: 2}
   - {fileID: 11400000, guid: 3e125dc1c79a630499d3aaca61bf0fbe, type: 2}
-  StorageSlots: []
+  StorageSlots:
+  - {fileID: 11400000, guid: 5d9404fdf621a2a4ba2ab194f4b6bc41, type: 2}
+  - {fileID: 11400000, guid: 413319311a177c6468696b95fb58ce66, type: 2}
+  - {fileID: 11400000, guid: 43c580d726a578e4485415f45d687350, type: 2}
+  - {fileID: 11400000, guid: a1e89b2bdb307f04eaeccb98fcd963b8, type: 2}
 --- !u!4 &279995968
 Transform:
   m_ObjectHideFlags: 0
@@ -2239,6 +2249,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4022860510935323040, guid: 7af1bfd65f8eb9849b58f99148a8dd2c, type: 3}
+      propertyPath: m_text
+      value: '0              iTi              .jL
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 4753474491472408051, guid: 7af1bfd65f8eb9849b58f99148a8dd2c, type: 3}
       propertyPath: m_Name
       value: PlayerPet1
@@ -3022,6 +3038,10 @@ PrefabInstance:
     - target: {fileID: 3079240544433299894, guid: 7af1bfd65f8eb9849b58f99148a8dd2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022860510935323040, guid: 7af1bfd65f8eb9849b58f99148a8dd2c, type: 3}
+      propertyPath: m_text
+      value: 0              iTi            / \
       objectReference: {fileID: 0}
     - target: {fileID: 4753474491472408051, guid: 7af1bfd65f8eb9849b58f99148a8dd2c, type: 3}
       propertyPath: m_Name

@@ -139,16 +139,19 @@ public class FightClass : MonoBehaviour
         }
         //if playerpet[i]hp kleiner als 1 dann button[i] deaktivieren
         //if all dead new scene
-        Player.AllInfos();
+       
 
         for (int a = 0; a < 3; a++)
         {
             if (Player.Pet[a].Hp <= 0)
             {
                 SearchingGold[a] = false;
-                PlayerPet[a].SetActive(false);
+                //karte nicht ausschalten
+                //PlayerPet[a].SetActive(false);
+                //Setze alles null und namen empthy
             }
         }
+        Player.AllInfos();
     }
 
     public void PlayerAttack(int i)
@@ -206,7 +209,6 @@ public class FightClass : MonoBehaviour
     {      
         for (int Turn =0; Turn <3; Turn++)
         {
-            print(Turn);
              if (Player.Pet[Turn].Hp > 0&&(DmgOnE1FromPlayer[Turn] != 0||DmgOnE2FromPlayer[Turn] != 0||DmgOnE3FromPlayer[Turn] != 0))
              {
                  yield return new WaitForSeconds(TimeBetweenAction);
@@ -261,6 +263,12 @@ public class FightClass : MonoBehaviour
         AttackOn[1] = 0;
         AttackOn[2] = 0;
 
+        
+
+        
+        PlayerOneDead();
+        PlayerTwoDead();
+        Player.AllInfos();
 
         if (E.EnemyHp[0] <= 0 && E.EnemyHp[1] <= 0 && E.EnemyHp[2] <= 0)
         {
@@ -284,7 +292,68 @@ public class FightClass : MonoBehaviour
         else
         {
             StartNextRound();
+        }                
+    }
+
+    void PlayerOneDead()
+    {
+        if (Player.Pet[0].Hp<=0 &&(Player.Pet[1].Hp>0|| Player.Pet[2].Hp > 0))
+        {
+            
+            Player.Pet[0].Name = Player.Pet[1].Name;
+            Player.Pet[0].StartHp = Player.Pet[1].StartHp;
+            Player.Pet[0].Hp = Player.Pet[1].Hp;
+            Player.Pet[0].StartAttackDmg = Player.Pet[1].StartAttackDmg;
+            Player.Pet[0].AttackDmg = Player.Pet[1].AttackDmg;
+
+            Player.Pet[1].Name = "";
+            Player.Pet[1].StartHp = 0;
+            Player.Pet[1].Hp = 0;
+            Player.Pet[1].StartAttackDmg = 0;
+            Player.Pet[1].AttackDmg = 0;
+            //Level
+            if (Player.Pet[0].Name == "")
+            {
+                PlayerOneDead();
+            }
         }
+        else
+        {
+            PlayerTwoDead();
+        }
+        
+    }
+
+    void PlayerTwoDead()
+    {
+        if (Player.Pet[1].Hp<=0 && (Player.Pet[2].Hp > 0))
+        {
+            
+            Player.Pet[1].Name = Player.Pet[2].Name;
+            Player.Pet[1].StartHp = Player.Pet[2].StartHp;
+            Player.Pet[1].Hp = Player.Pet[2].Hp;
+            Player.Pet[1].StartAttackDmg = Player.Pet[2].StartAttackDmg;
+            Player.Pet[1].AttackDmg = Player.Pet[2].AttackDmg;
+
+            Player.Pet[2].Name = "";
+            Player.Pet[2].StartHp = 0;
+            Player.Pet[2].Hp = 0;
+            Player.Pet[2].StartAttackDmg = 0;
+            Player.Pet[2].AttackDmg = 0;
+            //Level
+        }
+
+        
+        else
+        {
+            Player.Pet[1].Name = "";
+            Player.Pet[1].StartHp = 0;
+            Player.Pet[1].Hp = 0;
+            Player.Pet[1].StartAttackDmg = 0;
+            Player.Pet[1].AttackDmg = 0;
+            //PlayerThreeDead();
+        }
+        
     }
 
     public void Att1(int a)
