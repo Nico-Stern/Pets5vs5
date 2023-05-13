@@ -6,9 +6,10 @@ using TMPro;
 
 public class IngameSlots : MonoBehaviour
 {
-    
+
     public TMP_Text[] InfoTextDmg;
     public TMP_Text[] InfoTextHp;
     public TMP_Text[] InfoTextName;
-    public int AnzahlPets=3;
+    public int AnzahlPets = 3;
 }
+

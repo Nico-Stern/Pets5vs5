@@ -44,21 +44,13 @@ public class FightClass : MonoBehaviour
     public List<string> PlayerNamesList = new List<string>();
     public CoinsBank CB;
 
-    public void Awake()
+    public void Start()
     {//Pfeile die Anzeigen Welchesd Pet den gegner angreift werden inaktiv gesetzt
 
         //schleife 
         Arrow[0].SetActive(false);
         Arrow[1].SetActive(false);
         Arrow[2].SetActive(false);
-
-        Player.Pet[0].Hp = Player.Pet[0].StartHp;
-        Player.Pet[1].Hp = Player.Pet[1].StartHp;
-        Player.Pet[2].Hp = Player.Pet[2].StartHp;
-
-        Player.Pet[0].AttackDmg = Player.Pet[0].StartAttackDmg;
-        Player.Pet[1].AttackDmg = Player.Pet[1].StartAttackDmg;
-        Player.Pet[2].AttackDmg = Player.Pet[2].StartAttackDmg;
 
         PlayerHpList.Add(Player.Pet[0].Hp);
         PlayerHpList.Add(Player.Pet[1].Hp);
@@ -80,7 +72,7 @@ public class FightClass : MonoBehaviour
 
         PreroundShop.SetActive(false);
 
-        Choosing = 2;
+        Choosing = 0;
         ChoosingRotine();
     }
 
@@ -212,9 +204,9 @@ public class FightClass : MonoBehaviour
 
     public IEnumerator Ready()
     {      
-        for (int Turn =2; Turn >-1; Turn--)
+        for (int Turn =0; Turn <3; Turn++)
         {
-            
+            print(Turn);
              if (Player.Pet[Turn].Hp > 0&&(DmgOnE1FromPlayer[Turn] != 0||DmgOnE2FromPlayer[Turn] != 0||DmgOnE3FromPlayer[Turn] != 0))
              {
                  yield return new WaitForSeconds(TimeBetweenAction);
@@ -297,34 +289,35 @@ public class FightClass : MonoBehaviour
 
     public void Att1(int a)
     {
-        if (IsPressed[0])
+        if (IsPressed[2])
         {
-            IsPressed[0]= false;
+            IsPressed[2]= false;
             PlayerPet[0].GetComponent<Button>().interactable = false;
             if (a < 3)
             {
-                Arrow[0].SetActive(true);
+                Arrow[2].SetActive(true);
             }
             
             if (a == 3)
             {
-                SearchingGold[0] = true;
+                SearchingGold[2] = true;
             }
             if(a==2)
             {
-                DmgOnE3FromPlayer[0] += Player.Pet[0].AttackDmg;
-                Arrow[0].transform.Rotate(0, 0, 30);
+                DmgOnE3FromPlayer[2] += Player.Pet[2].AttackDmg;
+                Arrow[2].transform.localPosition = new Vector3(0, -280, 0);
             }
             if (a== 1)
             {
-                DmgOnE2FromPlayer[0] += Player.Pet[0].AttackDmg;
-                Arrow[0].transform.Rotate(0, 0,20);
-                Arrow[0].transform.localPosition=new Vector3(0, -225, 0);
+                DmgOnE2FromPlayer[2] += Player.Pet[2].AttackDmg;
+                Arrow[2].transform.Rotate(0, 0,20);
+                Arrow[2].transform.localPosition=new Vector3(0, -225, 0);
             }
             if(a==0)
             {
-                DmgOnE1FromPlayer[0] += Player.Pet[0].AttackDmg;
-                Arrow[0].transform.localPosition = new Vector3(0, -280, 0);
+                DmgOnE1FromPlayer[2] += Player.Pet[2].AttackDmg;
+                
+                Arrow[2].transform.Rotate(0, 0, 30);
             }
         }
         else
@@ -344,8 +337,8 @@ public class FightClass : MonoBehaviour
                 if (a == 2)
                 {
                     DmgOnE3FromPlayer[1] += Player.Pet[1].AttackDmg;
-                    Arrow[1].transform.Rotate(0, 0, 20);
-                    Arrow[1].transform.localPosition = new Vector3(0, +100, 0);
+                    Arrow[1].transform.Rotate(0, 0, -20);
+                    Arrow[1].transform.localPosition = new Vector3(0, -100, 0);
                 }
                 if (a == 1)
                 {
@@ -355,41 +348,45 @@ public class FightClass : MonoBehaviour
                 if (a == 0)
                 {
                     DmgOnE1FromPlayer[1] += Player.Pet[1].AttackDmg;
-                    Arrow[1].transform.Rotate(0, 0, -20);
-                    Arrow[1].transform.localPosition = new Vector3(0, -100, 0);
+                    
+
+                    Arrow[1].transform.Rotate(0, 0, 20);
+                    Arrow[1].transform.localPosition = new Vector3(0, +100, 0);
                 }
             }
             else
             {
-                if (IsPressed[2])
+                if (IsPressed[0])
                 {
-                    IsPressed[2] = false;
+                    IsPressed[0] = false;
                     PlayerPet[2].GetComponent<Button>().interactable = false;
                     if (a < 3)
                     {
-                        Arrow[2].SetActive(true);
+                        Arrow[0].SetActive(true);
                     }
                     if (a == 3)
                     {
-                        SearchingGold[2] = true;
+                        SearchingGold[0] = true;
                     }
                     if (a == 2)
                     {
-                        DmgOnE3FromPlayer[2] += Player.Pet[2].AttackDmg;
-                        Arrow[2].transform.Rotate(0, 0, 0);
-                        Arrow[2].transform.localPosition = new Vector3(0, +280, 0);
+                        DmgOnE3FromPlayer[0] += Player.Pet[0].AttackDmg;
+                        Arrow[0].transform.localPosition = new Vector3(0, +75, 0);
+                        Arrow[0].transform.Rotate(0, 0, -30);
                     }
                     if (a == 1)
                     {
-                        DmgOnE2FromPlayer[2] += Player.Pet[2].AttackDmg;
-                        Arrow[2].transform.Rotate(0, 0, -20);
-                        Arrow[2].transform.localPosition = new Vector3(0, +225, 0);
+                        DmgOnE2FromPlayer[0] += Player.Pet[0].AttackDmg;
+                        Arrow[0].transform.Rotate(0, 0, -20);
+                        Arrow[0].transform.localPosition = new Vector3(0, +225, 0);
                     }
                     if (a == 0)
                     {
-                        DmgOnE1FromPlayer[2] += Player.Pet[2].AttackDmg;
-                        Arrow[2].transform.localPosition = new Vector3(0, +75, 0);
-                        Arrow[2].transform.Rotate(0, 0, -30);
+                        DmgOnE1FromPlayer[0] += Player.Pet[0].AttackDmg;
+                        
+
+                        Arrow[0].transform.Rotate(0, 0, 0);
+                        Arrow[0].transform.localPosition = new Vector3(0, +280, 0);
                     }
                 }
                 else
@@ -400,7 +397,7 @@ public class FightClass : MonoBehaviour
         }
         PlayerPet[Choosing].transform.position = PlayerPet[Choosing].transform.position + Vector3.right * -forward;
         IsPressed[Choosing] = false;
-        Choosing--;
+        Choosing++;
         ChoosingRotine();
     }
 
@@ -436,7 +433,7 @@ public class FightClass : MonoBehaviour
     //Neues Kampfsystem 2,1,0
     public void ChoosingRotine()
     {
-        if (Choosing < 0)
+        if (Choosing > 2)
         {
             ReadyButton();
         }
@@ -444,7 +441,7 @@ public class FightClass : MonoBehaviour
         {
             if (Player.Pet[Choosing].Hp <= 0)
             {
-                Choosing--;
+                Choosing++;
                 ChoosingRotine();
             }
             else
@@ -457,7 +454,7 @@ public class FightClass : MonoBehaviour
 
     public void StartNextRound()
     {
-        Choosing = 2;
+        Choosing = 0;
 
         EnemyPet[0].GetComponent<Button>().interactable = true;
         EnemyPet[1].GetComponent<Button>().interactable = true;
@@ -480,54 +477,54 @@ public class FightClass : MonoBehaviour
             PlayerHpList[1] = Player.Pet[1].Hp;
             PlayerHpList[2] = Player.Pet[2].Hp;
         }
-        else
+        
+        
+        if(PlayerHpList.Count==2)
         {
-            if(PlayerHpList.Count==2)
+            if (PlayerNamesList[1] == Player.Pet[1].Name)
             {
-                if (PlayerNamesList[1] == Player.Pet[1].Name)
-                {
-                    //palyer1 und player2 leben
-                    PlayerHpList[0] = Player.Pet[0].Hp;
-                    PlayerHpList[1] = Player.Pet[1].Hp;
-                }
-                else
-                {
-                    if(PlayerNamesList[0] == Player.Pet[0].Name)
-                    {
-                        //player1 Lebt
-                        //player2 tot
-                        PlayerHpList[0] = Player.Pet[0].Hp;
-                        PlayerHpList[1] = Player.Pet[2].Hp;
-                    }
-                    else
-                    {
-                        //player1 tot
-                        //player2 Lebt
-                        PlayerHpList[0] = Player.Pet[1].Hp;
-                        PlayerHpList[1] = Player.Pet[2].Hp;
-                    }
-                }
-                
+                //palyer1 und player2 leben
+                PlayerHpList[0] = Player.Pet[0].Hp;
+                PlayerHpList[1] = Player.Pet[1].Hp;
             }
             else
             {
-                //1player lebt
-                if (PlayerNamesList[0] == Player.Pet[0].Name)
+
+                if(PlayerNamesList[0] == Player.Pet[0].Name)
                 {
-                    //player1 lebt
-                    PlayerHpList[0]= Player.Pet[0].Hp;
+                    //player1 Lebt
+                    //player2 tot
+                    PlayerHpList[0] = Player.Pet[0].Hp;
+                    PlayerHpList[1] = Player.Pet[2].Hp;
                 }
-                if (PlayerNamesList[0] == Player.Pet[1].Name)
+                else
                 {
-                    //player2 lebt
+                    //player1 tot
+                    //player2 Lebt
                     PlayerHpList[0] = Player.Pet[1].Hp;
-                }
-                if (PlayerNamesList[0] == Player.Pet[2].Name)
-                {
-                    //player3 lebt
-                    PlayerHpList[0] = Player.Pet[2].Hp;
-                }
+                    PlayerHpList[1] = Player.Pet[2].Hp;
+                }      
+            }    
+                
+        }
+        if (PlayerHpList.Count == 1)
+        {
+            //1player lebt
+            if (PlayerNamesList[0] == Player.Pet[0].Name)
+            {
+                //player1 lebt
+                PlayerHpList[0]= Player.Pet[0].Hp;
+            }
+            if (PlayerNamesList[0] == Player.Pet[1].Name)
+            {
+                //player2 lebt
+                PlayerHpList[0] = Player.Pet[1].Hp;
+            }
+            if (PlayerNamesList[0] == Player.Pet[2].Name)
+            {
+                //player3 lebt
+                PlayerHpList[0] = Player.Pet[2].Hp;
+            }
             }
         }
     }
-}
