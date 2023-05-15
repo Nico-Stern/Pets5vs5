@@ -20,7 +20,6 @@ public class FightClass : MonoBehaviour
     
     public bool[] IsPressed;
     private int Choosing;
-    
 
     [SerializeField] private float forward = 10f;
 
@@ -90,8 +89,6 @@ public class FightClass : MonoBehaviour
             {
                 //nr1lebt
                 Player.Pet[0].Hp = PlayerHpList[0];
-                
-
 
                 if (PlayerNamesList[1] == Player.Pet[1].Name)
                 {
@@ -104,8 +101,7 @@ public class FightClass : MonoBehaviour
                     //nr1lebt&nr3
                     //nr2tot
                     Player.Pet[2].Hp = PlayerHpList[1];
-                }
-                
+                }              
             }
             else
             {
@@ -129,8 +125,7 @@ public class FightClass : MonoBehaviour
             {
                 Player.Pet[2].Hp = PlayerHpList[0];
             }
-        }
-        
+        }      
 
         if (PlayerHpList[Eingabe] < 1)
         {
@@ -223,7 +218,7 @@ public class FightClass : MonoBehaviour
                  {
                      int Eingabe = Random.Range(0, 3);
                      CB.RoundCoins += Eingabe;
-                     print(Eingabe+" Coins found");
+                     print("Player "+ (Turn+1) +" Coins found "+Eingabe );
                      SearchingGold[Turn] = false;
                  }
                  yield return new WaitForSeconds(TimeBetweenAction);
@@ -262,9 +257,6 @@ public class FightClass : MonoBehaviour
         AttackOn[0] = 0;
         AttackOn[1] = 0;
         AttackOn[2] = 0;
-
-        
-
         
         PlayerOneDead();
         PlayerTwoDead();
@@ -311,8 +303,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[1].StartHp = 0;
             Player.Pet[1].Hp = 0;
             Player.Pet[1].StartAttackDmg = 0;
-            Player.Pet[1].AttackDmg = 0;
-            
+            Player.Pet[1].AttackDmg = 0;        
             //Level
             if (Player.Pet[0].Name == "")
             {
@@ -322,8 +313,7 @@ public class FightClass : MonoBehaviour
         else
         {
             PlayerTwoDead();
-        }
-        
+        }       
     }
 
     void PlayerTwoDead()
@@ -341,8 +331,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].StartHp = 0;
             Player.Pet[2].Hp = 0;
             Player.Pet[2].StartAttackDmg = 0;
-            Player.Pet[2].AttackDmg = 0;
-            
+            Player.Pet[2].AttackDmg = 0;           
             //Level
         }
         if(Player.Pet[1].Hp <= 0 && Player.Pet[2].Hp <= 0 )
@@ -351,8 +340,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[1].StartHp = 0;
             Player.Pet[1].Hp = 0;
             Player.Pet[1].StartAttackDmg = 0;
-            Player.Pet[1].AttackDmg = 0;
-            
+            Player.Pet[1].AttackDmg = 0;          
         }     
     }
 
@@ -428,8 +416,7 @@ public class FightClass : MonoBehaviour
                 }
                 if (a == 0)
                 {
-                    DmgOnE1FromPlayer[1] += Player.Pet[1].AttackDmg;
-                    
+                    DmgOnE1FromPlayer[1] += Player.Pet[1].AttackDmg; 
 
                     Arrow[1].transform.Rotate(0, 0, 20);
                     Arrow[1].transform.localPosition = new Vector3(0, +100, 0);
@@ -464,7 +451,6 @@ public class FightClass : MonoBehaviour
                     if (a == 0)
                     {
                         DmgOnE1FromPlayer[0] += Player.Pet[0].AttackDmg;
-                        
 
                         Arrow[0].transform.Rotate(0, 0, 0);
                         Arrow[0].transform.localPosition = new Vector3(0, +280, 0);
@@ -499,17 +485,13 @@ public class FightClass : MonoBehaviour
 
     public void ReadyButton()
     {
-        
-        
         EnemyPet[0].GetComponent<Button>().interactable = false;
         EnemyPet[1].GetComponent<Button>().interactable = false;
         EnemyPet[2].GetComponent<Button>().interactable = false;
-
         
         StartCoroutine(Ready());
         //Wenn Angegriffen wid
     }
-
     
     //Neues Kampfsystem 2,1,0
     public void ChoosingRotine()
