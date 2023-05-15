@@ -312,6 +312,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[1].Hp = 0;
             Player.Pet[1].StartAttackDmg = 0;
             Player.Pet[1].AttackDmg = 0;
+            
             //Level
             if (Player.Pet[0].Name == "")
             {
@@ -341,6 +342,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].Hp = 0;
             Player.Pet[2].StartAttackDmg = 0;
             Player.Pet[2].AttackDmg = 0;
+            
             //Level
         }
         if(Player.Pet[1].Hp <= 0 && Player.Pet[2].Hp <= 0 )
