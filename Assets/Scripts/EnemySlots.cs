@@ -13,6 +13,8 @@ public class EnemySlots : IngameSlots
     public Sprite[] EnemySprites;
     public FightClass F;
     int extra=0;
+    int check=1;
+
     public void Start()
     {
         Spawn3();    
@@ -52,10 +54,13 @@ public class EnemySlots : IngameSlots
 
     public void RoundCheck()
     {
-        int check =+ 9 / F.Runde;
-        if(check%10 == 0)
+        print(check);
+       
+        if(F.Runde == check*10)
         {
+            check++;
             extra++;
+            print("Plus eins gegner");
         }
     }
 

@@ -38,7 +38,7 @@ public class FightClass : MonoBehaviour
 
     public int[] AttackOn;
 
-    public int Runde=0;
+    public int Runde=1;
 
     public PlayerSlots Player;
     public EnemySlots E;
@@ -61,8 +61,6 @@ public class FightClass : MonoBehaviour
         PlayerNamesList.Add(Player.Pet[0].Name);//Nr1
         PlayerNamesList.Add(Player.Pet[1].Name);//Nr2
         PlayerNamesList.Add(Player.Pet[2].Name);//Nr3
-
-        Runde = 0;
 
         PlayerPet[0].GetComponent<Button>().interactable = false;
         PlayerPet[1].GetComponent<Button>().interactable = false;
