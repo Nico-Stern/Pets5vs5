@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.UI;
 
 public class FightClass : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class FightClass : MonoBehaviour
     public bool[] IsPressed;
     private int Choosing;
 
+    [SerializeField] private float dmgFeedbackTime = 0.5F;
+
     [SerializeField] private float forward = 10f;
 
     public int[] DmgOnPlayerPet;
@@ -35,7 +38,7 @@ public class FightClass : MonoBehaviour
 
     public int[] AttackOn;
 
-    public int Runde;
+    public int Runde=0;
 
     public PlayerSlots Player;
     public EnemySlots E;
@@ -79,53 +82,8 @@ public class FightClass : MonoBehaviour
     {
         int Eingabe = Random.Range(0, PlayerHpList.Count);
         PlayerHpList[Eingabe] -= E.EnemyDmg[i];
-        if (PlayerHpList.Count == 3)
-        {
-            Player.Pet[Eingabe].Hp = PlayerHpList[Eingabe];
-        }      
-        if (PlayerHpList.Count == 2)
-        {
-            if (PlayerNamesList[0] == Player.Pet[0].Name)
-            {
-                //nr1lebt
-                Player.Pet[0].Hp = PlayerHpList[0];
-
-                if (PlayerNamesList[1] == Player.Pet[1].Name)
-                {
-                    //nr1&nr2lebt
-                    //nr3tot
-                    Player.Pet[1].Hp = PlayerHpList[1];
-                }
-                else
-                {
-                    //nr1lebt&nr3
-                    //nr2tot
-                    Player.Pet[2].Hp = PlayerHpList[1];
-                }              
-            }
-            else
-            {
-                //nr1tot
-                //nr2&nr3Lebt
-                Player.Pet[2].Hp = PlayerHpList[1];
-                Player.Pet[1].Hp = PlayerHpList[0];
-            }
-        }
-        if (PlayerHpList.Count == 1)
-        {
-            if(PlayerNamesList[0] == Player.Pet[0].Name)
-            {
-                Player.Pet[0].Hp = PlayerHpList[0];
-            }
-            if (PlayerNamesList[0] == Player.Pet[1].Name)
-            {
-                Player.Pet[1].Hp = PlayerHpList[0];
-            }
-            if (PlayerNamesList[0] == Player.Pet[2].Name)
-            {
-                Player.Pet[2].Hp = PlayerHpList[0];
-            }
-        }      
+        Player.Pet[Eingabe].Hp = PlayerHpList[Eingabe];
+        StartCoroutine(PlayerHurt(Eingabe));
 
         if (PlayerHpList[Eingabe] < 1)
         {
@@ -149,9 +107,27 @@ public class FightClass : MonoBehaviour
         Player.AllInfos();
     }
 
+    IEnumerator PlayerHurt(int Index)
+    {
+        PlayerPet[Index].GetComponent<Image>().color = Color.red;
+        yield return new WaitForSeconds(dmgFeedbackTime);
+        PlayerPet[Index].GetComponent<Image>().color = Color.white;
+    }
+    
+    IEnumerator EnemyHurt(int Index)
+    {
+        EnemyPet[Index].GetComponent<Image>().color = Color.red;
+        yield return new WaitForSeconds(dmgFeedbackTime);
+        EnemyPet[Index].GetComponent<Image>().color = Color.white;
+    }
+
     public void PlayerAttack(int i)
-    {      
+    {
         int PDmgOn = DmgOnE1FromPlayer[i] + DmgOnE2FromPlayer[i] + DmgOnE3FromPlayer[i];
+        int currentEnmemy1Hp = E.EnemyHp[0];
+        int currentEnmemy2Hp = E.EnemyHp[1];
+        int currentEnmemy3Hp = E.EnemyHp[2];
+
         if (PDmgOn != 0)
         {
             if (E.EnemyHp[2] > 0)
@@ -161,6 +137,11 @@ public class FightClass : MonoBehaviour
                 {
                     E.EnemyDeath();
                 }
+                if(currentEnmemy3Hp!= E.EnemyHp[2])
+                {
+
+                StartCoroutine(EnemyHurt(2));
+                }
             }
             if (E.EnemyHp[1] > 0)
             {
@@ -169,6 +150,11 @@ public class FightClass : MonoBehaviour
                 {
                     E.EnemyDeath();
                 }
+                if (currentEnmemy2Hp != E.EnemyHp[1])
+                {
+
+                    StartCoroutine(EnemyHurt(1));
+                }
             }
             if (E.EnemyHp[0] > 0)
             {
@@ -176,6 +162,11 @@ public class FightClass : MonoBehaviour
                 if (E.EnemyHp[0] <= 0)
                 {
                     E.EnemyDeath();
+                }
+                if (currentEnmemy1Hp != E.EnemyHp[0])
+                {
+
+                    StartCoroutine(EnemyHurt(0));
                 }
             }
             E.InfoTextHp[2].text = E.EnemyHp[2].ToString();
@@ -211,28 +202,32 @@ public class FightClass : MonoBehaviour
                  yield return new WaitForSeconds(TimeBetweenAction);
                  EneemyHpCheck();
              }
-             else
-             {
-                 yield return new WaitForSeconds(TimeBetweenAction);
-                 if (SearchingGold[Turn] == true && Player.Pet[Turn].Hp > 0)
-                 {
-                     int Eingabe = Random.Range(0, 3);
-                     CB.RoundCoins += Eingabe;
-                     print("Player "+ (Turn+1) +" Coins found "+Eingabe );
-                     SearchingGold[Turn] = false;
-                 }
-                 yield return new WaitForSeconds(TimeBetweenAction);
-             }
+             
+            if (SearchingGold[Turn] == true && Player.Pet[Turn].Hp > 0)
+            {
+                yield return new WaitForSeconds(TimeBetweenAction);
+                int Eingabe = Random.Range(0, 3);
+                CB.RoundCoins += Eingabe;
+                print("Player "+ (Turn+1) +" Coins found "+Eingabe );
+                SearchingGold[Turn] = false;
+                
+            }
+             
 
-             Arrow[Turn].SetActive(false);
-             //Enemy 3 greift an
-             if (E.EnemyHp[Turn] > 0)
-             {
+            Arrow[Turn].SetActive(false);
+            //Enemy 3 greift an
+            if (E.EnemyHp[Turn] > 0)
+            {
                  yield return new WaitForSeconds(TimeBetweenAction);
                  EnemyIsChoosing(Turn);
-             }     
+                 yield return new WaitForSeconds(dmgFeedbackTime);
+            }
+            PlayerOneDead();
+            PlayerTwoDead();
+            PlayerThreeDead();
+            Player.AllInfos();
         }
-      
+        yield return new WaitForSeconds(TimeBetweenAction);
         //Attackenschaden wird zur�ckgesetzt
         DmgOnE1FromPlayer[0] = 0;
         DmgOnE1FromPlayer[1] = 0;
@@ -258,10 +253,7 @@ public class FightClass : MonoBehaviour
         AttackOn[1] = 0;
         AttackOn[2] = 0;
         
-        PlayerOneDead();
-        PlayerTwoDead();
-        PlayerThreeDead();
-        Player.AllInfos();
+        
 
         if (E.EnemyHp[0] <= 0 && E.EnemyHp[1] <= 0 && E.EnemyHp[2] <= 0)
         {
@@ -318,6 +310,19 @@ public class FightClass : MonoBehaviour
 
     void PlayerTwoDead()
     {
+        if(Player.Pet[1].Hp <= 0 && Player.Pet[2].Hp <= 0 )
+        {
+            Player.Pet[1].Name = "";
+            Player.Pet[1].StartHp = 0;
+            Player.Pet[1].Hp = 0;
+            Player.Pet[1].StartAttackDmg = 0;
+            Player.Pet[1].AttackDmg = 0;
+
+            if (PlayerHpList.Count < 2)
+            {
+                PlayerPet[1].SetActive(false);
+            }
+        }     
         if (Player.Pet[1].Hp<=0 && (Player.Pet[2].Hp > 0))
         {
             
@@ -334,14 +339,6 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].AttackDmg = 0;           
             //Level
         }
-        if(Player.Pet[1].Hp <= 0 && Player.Pet[2].Hp <= 0 )
-        {
-            Player.Pet[1].Name = "";
-            Player.Pet[1].StartHp = 0;
-            Player.Pet[1].Hp = 0;
-            Player.Pet[1].StartAttackDmg = 0;
-            Player.Pet[1].AttackDmg = 0;          
-        }     
     }
 
     void PlayerThreeDead()
@@ -353,8 +350,14 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].Hp = 0;
             Player.Pet[2].StartAttackDmg = 0;
             Player.Pet[2].AttackDmg = 0;
+
+            if (PlayerHpList.Count < 3)
+            {
+                PlayerPet[2].SetActive(false);
+            }
         }
     }
+    
 
     public void Att1(int a)
     {

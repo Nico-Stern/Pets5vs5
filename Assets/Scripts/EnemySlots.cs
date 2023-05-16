@@ -12,6 +12,7 @@ public class EnemySlots : IngameSlots
     public int[] EnemyDmg;
     public Sprite[] EnemySprites;
     public FightClass F;
+    int extra=0;
     public void Start()
     {
         Spawn3();    
@@ -21,8 +22,8 @@ public class EnemySlots : IngameSlots
         {
                 int Eingabe = Random.Range(0, AnzahlPets);
                 EnemyName[E] = AllPets[Eingabe].Name;
-                EnemyHp[E] = AllPets[Eingabe].Hp;
-                EnemyDmg[E] = AllPets[Eingabe].AttackDmg;
+                EnemyHp[E] = AllPets[Eingabe].Hp + extra;
+                EnemyDmg[E] = AllPets[Eingabe].AttackDmg + extra;
                 InfoTextName[E].text = EnemyName[E];
                 InfoTextDmg[E].text = EnemyDmg[E].ToString();
                 InfoTextHp[E].text = EnemyHp[E].ToString();
@@ -32,6 +33,13 @@ public class EnemySlots : IngameSlots
     public void Spawn3()
     {
         //Spawn wird 3x ausgef�hrt
+        print(F.Runde + ". Runde");
+        
+        if(F.Runde > 0)
+        {
+
+            RoundCheck();
+        }
         for (int i = 0; i < 3; i++)
         {
             Spawn(i);
@@ -40,7 +48,15 @@ public class EnemySlots : IngameSlots
         F.EnemyPet[1].SetActive(true);
         F.EnemyPet[2].SetActive(true);
         F.Runde++;
-        print(F.Runde + ". Runde");
+    }
+
+    public void RoundCheck()
+    {
+        int check =+ 9 / F.Runde;
+        if(check%10 == 0)
+        {
+            extra++;
+        }
     }
 
     private void Update()
@@ -53,8 +69,7 @@ public class EnemySlots : IngameSlots
 
     public void EnemyDeath()
     {
-        int Coins = Random.Range(0, 4);
-        CB.RoundCoins += Coins;
+        CB.RoundCoins += 2;
     }
 }
 
