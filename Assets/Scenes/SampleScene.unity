@@ -3562,6 +3562,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb361abac584457409cfadbe503c7ba6, type: 2}
   - {fileID: 11400000, guid: 74fdbbc26e020ae43b90ab5cfa64da94, type: 2}
   - {fileID: 11400000, guid: 3e125dc1c79a630499d3aaca61bf0fbe, type: 2}
+  F: {fileID: 1107169323}
   Player: {fileID: 279995967}
   DmgPlusButon:
   - {fileID: 1048409862}

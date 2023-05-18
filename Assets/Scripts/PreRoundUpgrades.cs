@@ -11,12 +11,15 @@ public class PreRoundUpgrades : MonoBehaviour
     public int HpCost = 5;
     public BaseSlots[] Pet;
 
+    public FightClass F;
+
     public PlayerSlots Player;
 
     public GameObject[] DmgPlusButon;
     public GameObject[] HpPlusButon;
     public Slider[] DmgSlider;
     public Slider[] HpSlider;
+
 
     public void StartPreRoundShop(int index)
     {
@@ -42,6 +45,7 @@ public class PreRoundUpgrades : MonoBehaviour
         {
             CB.RoundCoins -=HpCost;
             Pet[index].Hp++;
+            F.Refresh(index);
             HpSlider[index].value++;
             Player.AllInfos();
         }

@@ -46,6 +46,11 @@ public class FightClass : MonoBehaviour
     public List<string> PlayerNamesList = new List<string>();
     public CoinsBank CB;
 
+
+    bool one = false;
+    bool two = false;
+    bool three = false;
+
     public void Start()
     {//Pfeile die Anzeigen Welchesd Pet den gegner angreift werden inaktiv gesetzt
 
@@ -76,17 +81,81 @@ public class FightClass : MonoBehaviour
         ChoosingRotine();
     }
 
+    public void Update()
+    {
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1)&& one ==false)
+        {
+            
+            Player.Pet[0].Hp--;
+            PlayerHpList[0] = Player.Pet[0].Hp;
+            print(1);
+            Player.AllInfos();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && two == false)
+        {
+            
+            Player.Pet[1].Hp--;
+            PlayerHpList[1] = Player.Pet[1].Hp;
+            print(2);
+            Player.AllInfos();
+        }
+    
+        if (Input.GetKeyDown(KeyCode.Alpha3) && three == false)
+        {
+            
+            Player.Pet[2].Hp--;
+            PlayerHpList[2] = Player.Pet[2].Hp;
+            print(3);
+            Player.AllInfos();
+        }
+    
+    }
+
     public void EnemyIsChoosing(int i)
     {
         int Eingabe = Random.Range(0, PlayerHpList.Count);
         PlayerHpList[Eingabe] -= E.EnemyDmg[i];
-        Player.Pet[Eingabe].Hp = PlayerHpList[Eingabe];
+        if(PlayerHpList.Count==3)
+        {
+            Player.Pet[Eingabe].Hp = PlayerHpList[Eingabe];
+        }
+        if(PlayerHpList.Count==2)
+        {
+            if (PlayerNamesList[1] == Player.Pet[1].Name)
+            {
+                //Alles an richtiger stelle
+                Player.Pet[Eingabe].Hp = PlayerHpList[Eingabe];
+            }
+            else
+            {
+                Player.Pet[0].Hp = PlayerHpList[0];
+                Player.Pet[1].Hp = PlayerHpList[1];
+                Player.Pet[2].Hp = PlayerHpList[1];
+            }
+        }
+        if (PlayerHpList.Count == 1)
+        {
+            if (PlayerNamesList[0] == Player.Pet[0].Name)
+            {
+                Player.Pet[0].Hp = PlayerHpList[0];
+            }
+            if (PlayerNamesList[1] == Player.Pet[1].Name)
+            {
+                Player.Pet[1].Hp = PlayerHpList[0];
+            }
+            if (PlayerNamesList[2] == Player.Pet[2].Name)
+            {
+                Player.Pet[2].Hp = PlayerHpList[0];
+            }
+        }
         StartCoroutine(PlayerHurt(Eingabe));
 
         if (PlayerHpList[Eingabe] < 1)
         {
             PlayerHpList.Remove(PlayerHpList[Eingabe]);
             PlayerNamesList.Remove(PlayerNamesList[Eingabe]);
+            PlayerPet[Eingabe].SetActive(false);
         }
         //if playerpet[i]hp kleiner als 1 dann button[i] deaktivieren
         //if all dead new scene
@@ -208,7 +277,6 @@ public class FightClass : MonoBehaviour
                 CB.RoundCoins += Eingabe;
                 print("Player "+ (Turn+1) +" Coins found "+Eingabe );
                 SearchingGold[Turn] = false;
-                
             }
              
 
@@ -220,11 +288,10 @@ public class FightClass : MonoBehaviour
                  EnemyIsChoosing(Turn);
                  yield return new WaitForSeconds(dmgFeedbackTime);
             }
-            PlayerOneDead();
-            PlayerTwoDead();
-            PlayerThreeDead();
-            Player.AllInfos();
         }
+            PlayerOneDead();
+            
+            Player.AllInfos();
         yield return new WaitForSeconds(TimeBetweenAction);
         //Attackenschaden wird zur�ckgesetzt
         DmgOnE1FromPlayer[0] = 0;
@@ -289,38 +356,46 @@ public class FightClass : MonoBehaviour
             Player.Pet[0].StartAttackDmg = Player.Pet[1].StartAttackDmg;
             Player.Pet[0].AttackDmg = Player.Pet[1].AttackDmg;
 
-            Player.Pet[1].Name = "";
-            Player.Pet[1].StartHp = 0;
-            Player.Pet[1].Hp = 0;
-            Player.Pet[1].StartAttackDmg = 0;
-            Player.Pet[1].AttackDmg = 0;        
-            //Level
-            if (Player.Pet[0].Name == "")
+            Player.Pet[1].Name = Player.Pet[2].Name;
+            Player.Pet[1].StartHp = Player.Pet[2].StartHp;
+            Player.Pet[1].Hp = Player.Pet[2].Hp;
+            Player.Pet[1].StartAttackDmg = Player.Pet[2].StartAttackDmg;
+            Player.Pet[1].AttackDmg = Player.Pet[2].AttackDmg;
+
+            if (PlayerPet[0].active == false)
             {
-                PlayerOneDead();
+                PlayerPet[0].SetActive(true);
             }
+
+            
+           
+
+            Player.Pet[2].Name = "";
+            Player.Pet[2].StartHp = 0;
+            Player.Pet[2].Hp = 0;
+            Player.Pet[2].StartAttackDmg = 0;
+            Player.Pet[2].AttackDmg = 0;
+
+            PlayerPet[2].SetActive(false);
+
+
+
+            //Level
+            PlayerOneDead();
         }
         else
         {
             PlayerTwoDead();
-        }       
+        }
     }
 
     void PlayerTwoDead()
     {
-        if(Player.Pet[1].Hp <= 0 && Player.Pet[2].Hp <= 0 )
+        if (PlayerHpList.Count < 2)
         {
-            Player.Pet[1].Name = "";
-            Player.Pet[1].StartHp = 0;
-            Player.Pet[1].Hp = 0;
-            Player.Pet[1].StartAttackDmg = 0;
-            Player.Pet[1].AttackDmg = 0;
-
-            if (PlayerHpList.Count < 2)
-            {
-                PlayerPet[1].SetActive(false);
-            }
-        }     
+            PlayerPet[1].SetActive(false);
+        }
+             
         if (Player.Pet[1].Hp<=0 && (Player.Pet[2].Hp > 0))
         {
             
@@ -329,31 +404,39 @@ public class FightClass : MonoBehaviour
             Player.Pet[1].Hp = Player.Pet[2].Hp;
             Player.Pet[1].StartAttackDmg = Player.Pet[2].StartAttackDmg;
             Player.Pet[1].AttackDmg = Player.Pet[2].AttackDmg;
+            PlayerPet[1].SetActive(true);
 
-            Player.Pet[2].Name = "";
-            Player.Pet[2].StartHp = 0;
-            Player.Pet[2].Hp = 0;
-            Player.Pet[2].StartAttackDmg = 0;
-            Player.Pet[2].AttackDmg = 0;           
-            //Level
-        }
-    }
-
-    void PlayerThreeDead()
-    {
-        if(Player.Pet[2].Hp <= 0)
-        {
             Player.Pet[2].Name = "";
             Player.Pet[2].StartHp = 0;
             Player.Pet[2].Hp = 0;
             Player.Pet[2].StartAttackDmg = 0;
             Player.Pet[2].AttackDmg = 0;
 
-            if (PlayerHpList.Count < 3)
-            {
-                PlayerPet[2].SetActive(false);
-            }
+
+
+            //Level
         }
+        PlayerThreeDead();
+    }
+
+    void PlayerThreeDead()
+    {
+
+        if (Player.Pet[2].Hp <= 0)
+        {
+
+            Player.Pet[2].Name = "";
+            Player.Pet[2].StartHp = 0;
+            Player.Pet[2].Hp = 0;
+            Player.Pet[2].StartAttackDmg = 0;
+            Player.Pet[2].AttackDmg = 0;
+
+            
+            
+            PlayerPet[2].SetActive(false);
+        }
+            
+        
     }
     
 
@@ -529,66 +612,13 @@ public class FightClass : MonoBehaviour
 
     public void PreRoundReadyButton()
     {
+        
         StartNextRound();
         PreroundShop.SetActive(false);
         E.Spawn3();
-
-        //hp machen
-        if (PlayerHpList.Count == 3)
-        {
-            //Alle Leben
-            PlayerHpList[0] = Player.Pet[0].Hp;
-            PlayerHpList[1] = Player.Pet[1].Hp;
-            PlayerHpList[2] = Player.Pet[2].Hp;
-        }
-        
-        
-        if(PlayerHpList.Count==2)
-        {
-            if (PlayerNamesList[1] == Player.Pet[1].Name)
-            {
-                //palyer1 und player2 leben
-                PlayerHpList[0] = Player.Pet[0].Hp;
-                PlayerHpList[1] = Player.Pet[1].Hp;
-            }
-            else
-            {
-
-                if(PlayerNamesList[0] == Player.Pet[0].Name)
-                {
-                    //player1 Lebt
-                    //player2 tot
-                    PlayerHpList[0] = Player.Pet[0].Hp;
-                    PlayerHpList[1] = Player.Pet[2].Hp;
-                }
-                else
-                {
-                    //player1 tot
-                    //player2 Lebt
-                    PlayerHpList[0] = Player.Pet[1].Hp;
-                    PlayerHpList[1] = Player.Pet[2].Hp;
-                }      
-            }    
-                
-        }
-        if (PlayerHpList.Count == 1)
-        {
-            //1player lebt
-            if (PlayerNamesList[0] == Player.Pet[0].Name)
-            {
-                //player1 lebt
-                PlayerHpList[0]= Player.Pet[0].Hp;
-            }
-            if (PlayerNamesList[0] == Player.Pet[1].Name)
-            {
-                //player2 lebt
-                PlayerHpList[0] = Player.Pet[1].Hp;
-            }
-            if (PlayerNamesList[0] == Player.Pet[2].Name)
-            {
-                //player3 lebt
-                PlayerHpList[0] = Player.Pet[2].Hp;
-            }
-            }
-        }
     }
+        public void Refresh(int Index)
+        {
+            PlayerHpList[Index] = Player.Pet[Index].Hp;
+        }
+}

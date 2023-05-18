@@ -25,7 +25,7 @@ public class EnemySlots : IngameSlots
                 int Eingabe = Random.Range(0, AnzahlPets);
                 EnemyName[E] = AllPets[Eingabe].Name;
                 EnemyHp[E] = AllPets[Eingabe].Hp + extra;
-                EnemyDmg[E] = AllPets[Eingabe].AttackDmg + extra;
+                EnemyDmg[E] = AllPets[Eingabe].AttackDmg;//Extra raus genommen
                 InfoTextName[E].text = EnemyName[E];
                 InfoTextDmg[E].text = EnemyDmg[E].ToString();
                 InfoTextHp[E].text = EnemyHp[E].ToString();
@@ -39,7 +39,6 @@ public class EnemySlots : IngameSlots
         
         if(F.Runde > 0)
         {
-
             RoundCheck();
         }
         for (int i = 0; i < 3; i++)
@@ -54,13 +53,11 @@ public class EnemySlots : IngameSlots
 
     public void RoundCheck()
     {
-        print(check);
        
-        if(F.Runde == check*10)
+        if(F.Runde == check*15)
         {
             check++;
             extra++;
-            print("Plus eins gegner");
         }
     }
 
