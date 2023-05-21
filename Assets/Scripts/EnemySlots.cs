@@ -29,8 +29,7 @@ public class EnemySlots : IngameSlots
                 InfoTextName[E].text = EnemyName[E];
                 InfoTextDmg[E].text = EnemyDmg[E].ToString();
                 InfoTextHp[E].text = EnemyHp[E].ToString();
-        }
-        
+        }    
     }
     public void Spawn3()
     {
@@ -54,7 +53,7 @@ public class EnemySlots : IngameSlots
     public void RoundCheck()
     {
        
-        if(F.Runde == check*15)
+        if(F.Runde == check*10)
         {
             check++;
             extra++;

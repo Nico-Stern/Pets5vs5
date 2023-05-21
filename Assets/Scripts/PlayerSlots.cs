@@ -8,6 +8,8 @@ public class PlayerSlots : IngameSlots
     public BaseSlots[] Pet;
     public StorageSlots[] StorageSlots;
 
+    public int[] PlayerCrunntHp;
+
     private void Awake()
     {
         for(int i = 0; i <=2; i++) 
@@ -17,6 +19,8 @@ public class PlayerSlots : IngameSlots
             Pet[i].StartAttackDmg = StorageSlots[i].NormalAttackDmg;            
             Pet[i].Hp = Pet[i].StartHp;            
             Pet[i].AttackDmg = Pet[i].StartAttackDmg;
+
+            PlayerCrunntHp[i] = Pet[i].StartHp;
 
             print(i + " Pet generiert");
         }

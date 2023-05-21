@@ -909,6 +909,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 413319311a177c6468696b95fb58ce66, type: 2}
   - {fileID: 11400000, guid: 43c580d726a578e4485415f45d687350, type: 2}
   - {fileID: 11400000, guid: a1e89b2bdb307f04eaeccb98fcd963b8, type: 2}
+  PlayerCrunntHp: 000000000000000000000000
 --- !u!4 &279995968
 Transform:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ public class PreRoundUpgrades : MonoBehaviour
             Player.AllInfos();
         }
     }
+
     public void PlusHp(int index)
     {
         if (Pet[index].Hp < Pet[index].StartHp && Pet[index].Hp > 0&&CB.RoundCoins>=HpCost)
