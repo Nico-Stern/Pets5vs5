@@ -49,6 +49,7 @@ public class PreRoundUpgrades : MonoBehaviour
             F.Refresh(index);
             HpSlider[index].value++;
             Player.AllInfos();
+            Player.PlayerCrunntHp[index] = Player.Pet[index].Hp;
         }
     }
 }
