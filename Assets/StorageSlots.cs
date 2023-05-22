@@ -9,6 +9,7 @@ public class StorageSlots : ScriptableObject
     //public string Description;
     public int NormalHp;
     public int NormalAttackDmg;
+    public int PlayerCount;
     public int Level = 1;
     public int LevelEp;
     public int LevelMaxEp;

@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Nr2
   NormalHp: 3
   NormalAttackDmg: 2
+  PlayerCount: 2
   Level: 1
   LevelEp: 0
   LevelMaxEp: 0

@@ -35,6 +35,7 @@ public class EnemySlots : IngameSlots
     {
         //Spawn wird 3x ausgef�hrt
         print(F.Runde + ". Runde");
+        F.RoundCounterText.text = F.Runde.ToString()+ ". Round";
         
         if(F.Runde > 0)
         {

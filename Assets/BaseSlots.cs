@@ -11,6 +11,7 @@ public class BaseSlots : ScriptableObject
     public int Hp;
     public int StartAttackDmg;
     public int AttackDmg;
+    public int PlayerCount;
     public int Level = 1;
     public int LevelEp;
     public int LevelMaxEp;

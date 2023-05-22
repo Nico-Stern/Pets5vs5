@@ -17,7 +17,8 @@ public class PlayerSlots : IngameSlots
             Pet[i].Name = StorageSlots[i].Name;        
             Pet[i].StartHp = StorageSlots[i].NormalHp;        
             Pet[i].StartAttackDmg = StorageSlots[i].NormalAttackDmg;            
-            Pet[i].Hp = Pet[i].StartHp;            
+            Pet[i].Hp = Pet[i].StartHp;
+            Pet[i].PlayerCount = StorageSlots[i].PlayerCount;
             Pet[i].AttackDmg = Pet[i].StartAttackDmg;
 
             PlayerCrunntHp[i] = Pet[i].StartHp;
@@ -27,7 +28,7 @@ public class PlayerSlots : IngameSlots
     }
     public void Start()
     {
-        //Für jedes"Pet" wird seine Infos in text angegeben
+        //Fï¿½r jedes"Pet" wird seine Infos in text angegeben
         AllInfos();       
     }
 

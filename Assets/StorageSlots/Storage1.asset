@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Nr1
   NormalHp: 3
   NormalAttackDmg: 3
+  PlayerCount: 1
   Level: 1
   LevelEp: 0
   LevelMaxEp: 0

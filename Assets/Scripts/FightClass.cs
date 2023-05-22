@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEditor.UI;
 using UnityEngine.SceneManagement;
 
+
 public class FightClass : MonoBehaviour
 {
     public PreRoundUpgrades PreShopScript;
@@ -19,6 +20,8 @@ public class FightClass : MonoBehaviour
     public GameObject[] PlayerPet;
     public GameObject PreroundShop;
     public GameObject StartButton;
+
+    public TMP_Text RoundCounterText;
     
     public bool[] IsPressed;
     private int Choosing;
@@ -185,7 +188,7 @@ public class FightClass : MonoBehaviour
                 if(currentEnmemy3Hp!= E.EnemyHp[2])
                 {
 
-                StartCoroutine(EnemyHurt(2));
+                    StartCoroutine(EnemyHurt(2));
                 }
             }
             if (E.EnemyHp[1] > 0)
@@ -344,6 +347,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[0].Hp = Player.Pet[1].Hp;
             Player.Pet[0].StartAttackDmg = Player.Pet[1].StartAttackDmg;
             Player.Pet[0].AttackDmg = Player.Pet[1].AttackDmg;
+            Player.Pet[0].PlayerCount = Player.Pet[1].PlayerCount;
             Player.PlayerCrunntHp[0] = Player.Pet[0].Hp;  
 
             Player.Pet[1].Name = Player.Pet[2].Name;
@@ -351,6 +355,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[1].Hp = Player.Pet[2].Hp;
             Player.Pet[1].StartAttackDmg = Player.Pet[2].StartAttackDmg;
             Player.Pet[1].AttackDmg = Player.Pet[2].AttackDmg;
+            Player.Pet[1].PlayerCount = Player.Pet[2].PlayerCount;
             Player.PlayerCrunntHp[1] = Player.Pet[1].Hp;
 
             if (PlayerPet[0].activeInHierarchy == false)
@@ -366,6 +371,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].Hp = 0;
             Player.Pet[2].StartAttackDmg = 0;
             Player.Pet[2].AttackDmg = 0;
+            Player.Pet[2].PlayerCount = 0;
 
             PlayerPet[2].SetActive(false);
 
@@ -394,6 +400,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[1].Hp = 0;
             Player.Pet[1].StartAttackDmg = 0;
             Player.Pet[1].AttackDmg = 0;
+            Player.Pet[1].PlayerCount = 0;
         }
              
         if (Player.Pet[1].Hp<=0 && (Player.Pet[2].Hp > 0))
@@ -404,6 +411,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[1].Hp = Player.Pet[2].Hp;
             Player.Pet[1].StartAttackDmg = Player.Pet[2].StartAttackDmg;
             Player.Pet[1].AttackDmg = Player.Pet[2].AttackDmg;
+            Player.Pet[1].PlayerCount = Player.Pet[2].PlayerCount;
             PlayerPet[1].SetActive(true);
             Player.PlayerCrunntHp[1] = Player.Pet[1].Hp;
 
@@ -412,6 +420,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].Hp = 0;
             Player.Pet[2].StartAttackDmg = 0;
             Player.Pet[2].AttackDmg = 0;
+            Player.Pet[2].PlayerCount = 0;
 
 
 
@@ -430,7 +439,7 @@ public class FightClass : MonoBehaviour
             Player.Pet[2].Hp = 0;
             Player.Pet[2].StartAttackDmg = 0;
             Player.Pet[2].AttackDmg = 0;
-
+            Player.Pet[2].PlayerCount = 0;
             
             
             PlayerPet[2].SetActive(false);

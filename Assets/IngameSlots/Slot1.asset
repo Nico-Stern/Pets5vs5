@@ -17,6 +17,7 @@ MonoBehaviour:
   Hp: 3
   StartAttackDmg: 3
   AttackDmg: 3
+  PlayerCount: 0
   Level: 1
   LevelEp: 0
   LevelMaxEp: 0
